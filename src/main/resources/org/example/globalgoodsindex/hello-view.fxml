@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
+
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
-    <BarChart>
-        <xAxis>
-            <CategoryAxis side="BOTTOM"/>
-        </xAxis>
-        <yAxis>
-            <NumberAxis side="LEFT"/>
-        </yAxis>
-    </BarChart>
+
+    <fx:include source="BarChartView.fxml"/>
+
     <HBox alignment="CENTER" prefHeight="500.0" prefWidth="300.0">
         <fx:include source="countryList.fxml"/>
         <fx:include source="productsList.fxml"/>
     </HBox>
+
 </VBox>
