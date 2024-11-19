@@ -6,6 +6,7 @@ module org.example.globalgoodsindex {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
 
-    opens org.example.globalgoodsindex to javafx.fxml;
+    opens org.example.globalgoodsindex.controllers to javafx.fxml;
+
     exports org.example.globalgoodsindex;
 }

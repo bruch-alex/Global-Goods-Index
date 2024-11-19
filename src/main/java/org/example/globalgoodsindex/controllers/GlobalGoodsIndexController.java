@@ -1,9 +1,9 @@
-package org.example.globalgoodsindex;
+package org.example.globalgoodsindex.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class GlobalGoodsIndexController {
     @FXML
     private Label welcomeText;
 
