@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.globalgoodsindex.controllers.CountryListController">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.globalgoodsindex.controllers.CountryListController">
     <ListView fx:id="countryList" prefHeight="300.0" prefWidth="300.0"/>
 </VBox>
