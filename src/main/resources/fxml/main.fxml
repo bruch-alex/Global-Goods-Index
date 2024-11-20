@@ -9,11 +9,11 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <fx:include source="ui/BarChartView.fxml"/>
+    <fx:include source="ui/bar-chart-view.fxml"/>
 
     <HBox alignment="CENTER" prefHeight="500.0" prefWidth="300.0">
-        <fx:include source="ui/countryList.fxml"/>
-        <fx:include source="ui/productsList.fxml"/>
+        <fx:include source="ui/country-list.fxml"/>
+        <fx:include source="ui/product-list.fxml"/>
     </HBox>
 
 </VBox>

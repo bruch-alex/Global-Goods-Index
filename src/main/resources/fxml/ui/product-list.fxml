@@ -3,6 +3,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.globalgoodsindex.controllers.ProductsListController">
-    <ListView fx:id="productsList" prefHeight="300.0" prefWidth="300.0"/>
+      fx:controller="org.example.globalgoodsindex.controllers.ProductListController">
+    <ListView fx:id="productList" prefHeight="300.0" prefWidth="300.0"/>
 </VBox>
