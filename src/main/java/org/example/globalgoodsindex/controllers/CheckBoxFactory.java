@@ -2,7 +2,6 @@ package org.example.globalgoodsindex.controllers;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
-import org.example.globalgoodsindex.Main;
 import org.example.globalgoodsindex.core.models.Entry;
 
 public class CheckBoxFactory extends ListCell<Entry> {
@@ -24,8 +23,6 @@ public class CheckBoxFactory extends ListCell<Entry> {
                     System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
                     System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
 
-                    // call updater of BarChart data
-                    //Main.dataHandler.updateChart();
                 }
             });
 

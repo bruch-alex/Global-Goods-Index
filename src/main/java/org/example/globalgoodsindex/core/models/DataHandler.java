@@ -1,31 +1,36 @@
 package org.example.globalgoodsindex.core.models;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
 import org.example.globalgoodsindex.core.services.CSVReader;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class DataHandler {
 
-    List<Salarie> salaries;
-    List<Product> products;
+    private final ObservableList<Salarie> salaries;
+    private final ObservableList<Product> products;
 
-    //public ObservableList<XYChart.Data<Salarie, Product>> data; // update this data ?
+    private final ObservableList<Salarie> selectedSalaries;
+    private final ObservableList<Product> selectedProducts;
 
-    public void updateChart(){
-
-    }
 
     public DataHandler() {
-        this.salaries = CSVReader.readCSVToList("/data/salaries/salaries.txt");
+        this.salaries = FXCollections.observableArrayList(CSVReader.readCSVToList("/data/salaries/salaries.txt"));
+        this.products = FXCollections.observableArrayList();
+        this.selectedSalaries = FXCollections.observableArrayList();
+        this.selectedProducts = FXCollections.observableArrayList();
+
         populateProducts();
+
+        // Set up listeners to dynamically track and update selected items
+        // Called in the constructor to ensure selections stay in sync with the UI
+        setupSelectionListeners();
+
     }
 
     private void populateProducts() {
-        this.products = new ArrayList<>();
         File folder = new File(getClass().getResource("/data/products/").getPath());
         File[] listOfFiles = folder.listFiles();
         for (var file : listOfFiles) {
@@ -33,11 +38,43 @@ public class DataHandler {
         }
     }
 
-    public List<Salarie> getSalaries() {
+    private void setupSelectionListeners() {
+        // Track selected Salaries
+        for (Salarie salarie : salaries) {
+            salarie.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    selectedSalaries.add(salarie);
+                } else {
+                    selectedSalaries.remove(salarie);
+                }
+            });
+        }
+
+        // Track selected Products
+        for (Product product : products) {
+            product.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    selectedProducts.add(product);
+                } else {
+                    selectedProducts.remove(product);
+                }
+            });
+        }
+    }
+
+    public ObservableList<Salarie> getSalaries() {
         return salaries;
     }
 
-    public List<Product> getProducts() {
+    public ObservableList<Product> getProducts() {
         return products;
+    }
+
+    public ObservableList<Salarie> getSelectedSalaries() {
+        return selectedSalaries;
+    }
+
+    public ObservableList<Product> getSelectedProducts() {
+        return selectedProducts;
     }
 }

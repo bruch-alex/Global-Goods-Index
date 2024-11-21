@@ -1,16 +1,13 @@
 package org.example.globalgoodsindex.controllers;
 
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tooltip;
-import javafx.util.Duration;
 import org.example.globalgoodsindex.Main;
+import org.example.globalgoodsindex.core.models.Product;
+import org.example.globalgoodsindex.core.models.Salarie;
 
 
 public class BarChartController {
@@ -19,22 +16,15 @@ public class BarChartController {
     private BarChart<String, Number> barChart;
 
     @FXML
-    private CategoryAxis xAxis;
-
-    @FXML
-    private NumberAxis yAxis;
-
-    @FXML
     public void initialize() {
         populateChart();
 
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(5000), _ -> updateChart())
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);  // Loop indefinitely
-        timeline.play();
+        // ListChangeListener => Called after a change has been made to an ObservableList.
+        Main.dataHandler.getSelectedSalaries().addListener((ListChangeListener<Salarie>) change -> updateChart());
+        Main.dataHandler.getSelectedProducts().addListener((ListChangeListener<Product>) change -> updateChart());
     }
-    private void updateChart(){
+
+    private void updateChart() {
         barChart.getData().clear();
         populateChart();
     }
@@ -59,7 +49,7 @@ public class BarChartController {
                         dataPoint.nodeProperty().addListener((observable, oldNode, newNode) -> {
                             if (newNode != null) {
                                 Tooltip tooltip = new Tooltip(
-                                        "Country: " + country + "\n" +
+                                        "Country: " + country.getName() + "\n" +
                                                 "Average Salary: $" + salary + "\n" +
                                                 "Product Price: $" + price + "\n" +
                                                 "Product Purchasable: " + productsCount
