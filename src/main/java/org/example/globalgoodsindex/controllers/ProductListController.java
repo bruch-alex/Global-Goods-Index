@@ -1,9 +1,9 @@
 package org.example.globalgoodsindex.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import org.example.globalgoodsindex.Main;
 import org.example.globalgoodsindex.core.models.Entry;
 
 public class ProductListController {
@@ -12,12 +12,9 @@ public class ProductListController {
 
     @FXML
     public void initialize() {
-        ObservableList<Entry> items = FXCollections.observableArrayList(
-                new Entry("Iphone", 1000),
-                new Entry("Banana", 150),
-                new Entry("Apple", 300));
 
-        productList.setItems(items);
+        //countryList.setItems(FXCollections.observableArrayList(Main.dataHandler.getSalaries()));
+        productList.setItems(FXCollections.observableArrayList(Main.dataHandler.getProducts()));
         productList.setCellFactory(_ -> new CheckBoxFactory());
     }
 }

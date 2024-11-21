@@ -7,6 +7,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Tooltip;
+import org.example.globalgoodsindex.Main;
+import org.example.globalgoodsindex.core.models.Product;
 
 
 import java.util.HashMap;
@@ -24,51 +26,66 @@ public class BarChartController {
 
     @FXML
     public void initialize() {
-        // dummy productDetails for visualization
-        HashMap<String, Double> productDetails = new HashMap<>();
-        productDetails.put("Switzerland", 6.94);
-        productDetails.put("US", 5.81);
-        productDetails.put("UK", 5.08);
-        productDetails.put("Russia", 1.86);
-        productDetails.put("India", 2.36);
-
-        HashMap<String, Double> avgSalaries = new HashMap<>();
-        avgSalaries.put("Switzerland", 6500.0);
-        avgSalaries.put("US", 5000.0);
-        avgSalaries.put("UK", 3500.0);
-        avgSalaries.put("Russia", 1200.0);
-        avgSalaries.put("India", 600.0);
-
-        populateChart(productDetails, avgSalaries);
+        populateChart();
     }
 
-    private void populateChart(HashMap<String, Double> productDetails, HashMap<String, Double> avgSalaries) {
+    private void populateChart() {
         XYChart.Series<String, Number> productSeries = new XYChart.Series<>();
         productSeries.setName("Product name");
 
-        for (String country : productDetails.keySet()) {
-            double price = productDetails.get(country);
-            double salary = avgSalaries.get(country);
-            int burgersCount = (int) (salary / price);
+        for (var country : Main.dataHandler.getSalaries()) {
+            if(country.isSelected()){
 
-            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(country, (double) burgersCount);
+                for(var product : Main.dataHandler.getProducts()){
+                    if(product.isSelected()){
 
-            productSeries.getData().add(dataPoint);
+                        double price = product.getPrice(country.getName());
+                        System.out.println("Product price: " + price);
+                        double salary = country.getSalary();
+                        System.out.println("Product salary: " + salary);
+                        int productsCount = (int) (salary / price);
+
+                        XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(country.getName(), (double) productsCount);
+
+                        productSeries.getData().add(dataPoint);
+
+                        dataPoint.nodeProperty().addListener((observable, oldNode, newNode) -> {
+                            if (newNode != null) {
+                                Tooltip tooltip = new Tooltip(
+                                        "Country: " + country + "\n" +
+                                                "Average Salary: $" + salary + "\n" +
+                                                "Product Price: $" + price + "\n" +
+                                                "Product Purchasable: " + productsCount
+                                );
+                                Tooltip.install(newNode, tooltip);
+                            }
+                        });
+                    }
+                }
+            }
+
+//            double price = productDetails.get(country);
+//            double salary = avgSalaries.get(country);
+//
+//            int burgersCount = (int) (salary / price);
+
+//            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(country, (double) burgersCount);
+
+//            productSeries.getData().add(dataPoint);
 
             // addListener event it's triggered whenever the nodeProperty() value changes
-            dataPoint.nodeProperty().addListener((observable, oldNode, newNode) -> {
-                if (newNode != null) {
-                    Tooltip tooltip = new Tooltip(
-                            "Country: " + country + "\n" +
-                                    "Average Salary: $" + salary + "\n" +
-                                    "Product Price: $" + price + "\n" +
-                                    "Product Purchasable: " + burgersCount
-                    );
-                    Tooltip.install(newNode, tooltip);
-                }
-            });
+//            dataPoint.nodeProperty().addListener((observable, oldNode, newNode) -> {
+//                if (newNode != null) {
+//                    Tooltip tooltip = new Tooltip(
+//                            "Country: " + country + "\n" +
+//                                    "Average Salary: $" + salary + "\n" +
+//                                    "Product Price: $" + price + "\n" +
+//                                    "Product Purchasable: " + burgersCount
+//                    );
+//                    Tooltip.install(newNode, tooltip);
+//                }
+//            });
         }
-
         barChart.getData().add(productSeries);
     }
 

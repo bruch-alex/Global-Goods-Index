@@ -4,10 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.globalgoodsindex.core.models.DataHandler;
 
 import java.io.IOException;
 
 public class Main extends Application {
+    public static DataHandler dataHandler = new DataHandler();
+
     public static void main(String[] args) {
         launch();
     }
