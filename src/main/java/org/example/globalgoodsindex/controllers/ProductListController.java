@@ -12,8 +12,6 @@ public class ProductListController {
 
     @FXML
     public void initialize() {
-
-        //countryList.setItems(FXCollections.observableArrayList(Main.dataHandler.getSalaries()));
         productList.setItems(FXCollections.observableArrayList(Main.dataHandler.getProducts()));
         productList.setCellFactory(_ -> new CheckBoxFactory());
     }

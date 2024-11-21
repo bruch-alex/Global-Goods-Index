@@ -11,7 +11,6 @@ public class Product extends Entry{
     public Product(String name) {
         super(name.replace(".txt", ""));
         this.prices = CSVReader.readCSVToList("/data/products/" + name);
-        //System.out.println(this);
     }
 
     public List<Salarie> getPrices() {

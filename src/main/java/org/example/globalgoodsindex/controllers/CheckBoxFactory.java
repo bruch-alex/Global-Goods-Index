@@ -2,10 +2,10 @@ package org.example.globalgoodsindex.controllers;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
+import org.example.globalgoodsindex.Main;
 import org.example.globalgoodsindex.core.models.Entry;
 
 public class CheckBoxFactory extends ListCell<Entry> {
-
     @Override
     protected void updateItem(Entry entry, boolean empty) {
         super.updateItem(entry, empty);
@@ -20,13 +20,15 @@ public class CheckBoxFactory extends ListCell<Entry> {
             // Listener for debugging only
             checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
                 if (newValue || oldValue) {
-                    // call updater of BarChart
+                    // debugging
                     System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
-                    //entry.changeSelectedValue();
                     System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
 
+                    // call updater of BarChart data
+                    //Main.dataHandler.updateChart();
                 }
             });
+
             setGraphic(checkBox);
         }
     }
