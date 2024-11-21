@@ -8,12 +8,12 @@ import java.util.Objects;
 public class Entry {
     private final String name;
     private final double price;
-    private boolean isSelected;
+    private final BooleanProperty selectedProperty;
 
     public Entry(String name, double price) {
         this.name = name;
         this.price = price;
-        this.isSelected = false;
+        this.selectedProperty = new SimpleBooleanProperty(false);
     }
 
     public String getName() {
@@ -25,19 +25,15 @@ public class Entry {
     }
 
     public boolean isSelected() {
-        return this.isSelected;
+        return this.selectedProperty.get();
     }
 
-//    public BooleanProperty selectedProperty(){
-//        return isSelected;
-//    }
+    public BooleanProperty selectedProperty(){
+        return this.selectedProperty;
+    }
 
-//    public void setSelected(boolean selected) {
-//        this.isSelected.set(selected);
-//    }
-
-    public void changeValue(){
-        this.isSelected = !this.isSelected;
+    public void setSelected(boolean selected) {
+        this.selectedProperty.set(selected);
     }
 
     @Override
@@ -45,7 +41,7 @@ public class Entry {
         return "Entry{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", isSelected=" + isSelected +
+                ", isSelected=" + selectedProperty +
                 '}';
     }
 

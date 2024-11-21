@@ -12,19 +12,12 @@ public class ProductListController {
 
     @FXML
     public void initialize() {
-
         ObservableList<Entry> items = FXCollections.observableArrayList(
                 new Entry("Iphone", 1000),
                 new Entry("Banana", 150),
                 new Entry("Apple", 300));
 
-        if (items.isEmpty()) {
-            System.out.println("ObservableList is empty!");
-        } else {
-            System.out.println("ObservableList contains: " + items.size() + " items.");
-        }
-
         productList.setItems(items);
-        productList.setCellFactory(_ -> new CheckBoxController());
+        productList.setCellFactory(_ -> new CheckBoxFactory());
     }
 }

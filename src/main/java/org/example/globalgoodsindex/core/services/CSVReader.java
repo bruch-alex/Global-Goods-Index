@@ -30,7 +30,7 @@ public class CSVReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.printf("Found %d lines in %s file", lines.size(), filePath);
         return lines;
     }
 

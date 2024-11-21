@@ -5,6 +5,7 @@ import javafx.scene.control.ListView;
 import org.example.globalgoodsindex.core.models.Entry;
 import org.example.globalgoodsindex.core.services.CSVReader;
 
+
 public class CountryListController {
     @FXML
     private ListView<Entry> countryList;
@@ -14,6 +15,6 @@ public class CountryListController {
         countryList.setItems(CSVReader.readCSV("/data/salaries/salaries.txt"));
 
         // Set the cell factory to display names and checkboxes
-        countryList.setCellFactory(_ -> new CheckBoxController());
+        countryList.setCellFactory(_ -> new CheckBoxFactory());
     }
 }
