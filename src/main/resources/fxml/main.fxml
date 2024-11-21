@@ -4,16 +4,16 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <fx:include source="BarChartView.fxml"/>
+    <fx:include source="ui/bar-chart-view.fxml"/>
 
     <HBox alignment="CENTER" prefHeight="500.0" prefWidth="300.0">
-        <fx:include source="countryList.fxml"/>
-        <fx:include source="productsList.fxml"/>
+        <fx:include source="ui/country-list.fxml"/>
+        <fx:include source="ui/product-list.fxml"/>
     </HBox>
 
 </VBox>

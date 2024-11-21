@@ -6,9 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import org.example.globalgoodsindex.core.models.Entry;
 
-public class ProductsListController {
+public class ProductListController {
     @FXML
-    private ListView<Entry> productsList;
+    private ListView<Entry> productList;
 
     @FXML
     public void initialize() {
@@ -24,7 +24,7 @@ public class ProductsListController {
             System.out.println("ObservableList contains: " + items.size() + " items.");
         }
 
-        productsList.setItems(items);
-        productsList.setCellFactory(_ -> new ListEntryWithCheckBox());
+        productList.setItems(items);
+        productList.setCellFactory(_ -> new CheckBoxController());
     }
 }

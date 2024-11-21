@@ -4,7 +4,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
 import org.example.globalgoodsindex.core.models.Entry;
 
-public class ListEntryWithCheckBox extends ListCell<Entry> {
+public class CheckBoxController extends ListCell<Entry> {
     private final CheckBox checkBox = new CheckBox();
 
     @Override
@@ -15,11 +15,11 @@ public class ListEntryWithCheckBox extends ListCell<Entry> {
             setGraphic(null);
         } else {
             checkBox.setText(entry.getName());
-
             checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue || oldValue) {
+                    // sout for debugging
+                    System.out.println("Changed value for " + entry.getName() + " from " + oldValue + " to " + newValue);
                     entry.changeValue();
-                    //System.out.println("Checked: " + entry.getName() + " - Number: " + entry.getPrice() + entry.isSelected());
                 }
             });
             setGraphic(checkBox);

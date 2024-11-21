@@ -14,6 +14,6 @@ public class CountryListController {
         countryList.setItems(CSVReader.readCSV("/data/salaries/salaries.txt"));
 
         // Set the cell factory to display names and checkboxes
-        countryList.setCellFactory(_ -> new ListEntryWithCheckBox());
+        countryList.setCellFactory(_ -> new CheckBoxController());
     }
 }
