@@ -4,7 +4,7 @@
 
 <BarChart xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="org.example.globalgoodsindex.controllers.BarChartController"
-          fx:id="barChart" animated="true" prefHeight="400" prefWidth="600">
+          fx:id="barChart" animated="false" prefHeight="400" prefWidth="600">
     <xAxis>
         <CategoryAxis fx:id="xAxis" label="Country"/>
     </xAxis>
