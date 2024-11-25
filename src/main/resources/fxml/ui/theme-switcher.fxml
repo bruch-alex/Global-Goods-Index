@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<HBox alignment="CENTER_RIGHT"
+      xmlns="http://javafx.com/javafx/">
+
+    <!--
+      Controller for theme switching must be created
+      fx:controller="org.example.globalgoodsindex.controllers.ThemeSwitcherController"
+
+      also we need to choose icon
+      -->
+
+    <FontIcon iconLiteral="fas-sun" iconSize="32" selectionEnd="1" selectionFill="WHITE"/>
+    <FontIcon iconLiteral="far-sun" iconSize="32" selectionEnd="1" selectionFill="WHITE"/>
+    <FontIcon iconLiteral="far-moon" iconSize="32" selectionEnd="1" selectionFill="WHITE"/>
+    <FontIcon iconLiteral="fas-moon" iconSize="32" selectionEnd="1" selectionFill="aliceblue"/>
+
+    <opaqueInsets>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </opaqueInsets>
+</HBox>

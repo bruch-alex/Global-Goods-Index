@@ -9,7 +9,7 @@ import org.example.globalgoodsindex.core.models.DataHandler;
 import java.io.IOException;
 
 public class Main extends Application {
-    public static DataHandler dataHandler = new DataHandler();
+    public static DataHandler dataHandler;
 
     public static void main(String[] args) {
         launch();
@@ -17,9 +17,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        dataHandler = new DataHandler();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
+        stage.setTitle("Global Goods Comparison");
         stage.setScene(scene);
         stage.show();
     }
