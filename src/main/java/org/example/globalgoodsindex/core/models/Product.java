@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Product extends Entry{
 
-    List<Salarie> prices;
+    List<Salaries> prices;
 
     public Product(String name) {
         super(name.replace(".txt", ""));
         this.prices = CSVReader.readCSVToList("/data/products/" + name);
     }
 
-    public List<Salarie> getPrices() {
+    public List<Salaries> getPrices() {
         return prices;
     }
 

@@ -5,28 +5,19 @@ import javafx.collections.ObservableList;
 import org.example.globalgoodsindex.core.services.CSVReader;
 
 import java.io.File;
+import java.util.List;
 
 
 public class DataHandler {
 
-    private final ObservableList<Salarie> salaries;
+    private final ObservableList<Salaries> salaries;
     private final ObservableList<Product> products;
-
-    private final ObservableList<Salarie> selectedSalaries;
-    private final ObservableList<Product> selectedProducts;
 
 
     public DataHandler() {
         this.salaries = FXCollections.observableArrayList(CSVReader.readCSVToList("/data/salaries/salaries.txt"));
         this.products = FXCollections.observableArrayList();
-        this.selectedSalaries = FXCollections.observableArrayList();
-        this.selectedProducts = FXCollections.observableArrayList();
-
         populateProducts();
-
-        // Set up listeners to dynamically track and update selected items
-        // Called in the constructor to ensure selections stay in sync with the UI
-        setupSelectionListeners();
 
     }
 
@@ -38,43 +29,12 @@ public class DataHandler {
         }
     }
 
-    private void setupSelectionListeners() {
-        // Track selected Salaries
-        for (Salarie salarie : salaries) {
-            salarie.selectedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    selectedSalaries.add(salarie);
-                } else {
-                    selectedSalaries.remove(salarie);
-                }
-            });
-        }
-
-        // Track selected Products
-        for (Product product : products) {
-            product.selectedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    selectedProducts.add(product);
-                } else {
-                    selectedProducts.remove(product);
-                }
-            });
-        }
-    }
-
-    public ObservableList<Salarie> getSalaries() {
+    public List<Salaries> getSalaries() {
         return salaries;
     }
 
-    public ObservableList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public ObservableList<Salarie> getSelectedSalaries() {
-        return selectedSalaries;
-    }
-
-    public ObservableList<Product> getSelectedProducts() {
-        return selectedProducts;
-    }
 }
