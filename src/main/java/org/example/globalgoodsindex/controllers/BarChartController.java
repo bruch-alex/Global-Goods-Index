@@ -2,6 +2,8 @@ package org.example.globalgoodsindex.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tooltip;
 import org.example.globalgoodsindex.Main;
@@ -12,10 +14,17 @@ import org.example.globalgoodsindex.core.models.Salaries;
 public class BarChartController {
 
     @FXML
+    CategoryAxis xAxis;
+    @FXML
+    NumberAxis yAxis;
+
+    @FXML
     private BarChart<String, Number> barChart;
 
     @FXML
     public void initialize() {
+        xAxis.labelProperty().bind(I18N.createStringBinding("country"));
+        yAxis.labelProperty().bind(I18N.createStringBinding("amount"));
         setupProductListeners();
         setupSalariesListeners();
     }

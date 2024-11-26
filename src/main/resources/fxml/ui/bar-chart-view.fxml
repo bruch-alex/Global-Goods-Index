@@ -6,9 +6,9 @@
           fx:controller="org.example.globalgoodsindex.controllers.BarChartController"
           fx:id="barChart" animated="false" prefHeight="600" prefWidth="600">
     <xAxis>
-        <CategoryAxis fx:id="xAxis" label="Country"/>
+        <CategoryAxis fx:id="xAxis"/>
     </xAxis>
     <yAxis>
-        <NumberAxis fx:id="yAxis" label="Amount"/>
+        <NumberAxis fx:id="yAxis"/>
     </yAxis>
 </BarChart>

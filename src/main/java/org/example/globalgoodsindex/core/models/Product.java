@@ -20,7 +20,7 @@ public class Product extends Entry{
     @Override
     public String toString() {
         return "\n\nProduct{" +
-                "name='" + this.name + '\'' +
+                "name='" + this.nameProperty + '\'' +
                 ", prices=" + prices +
                 '}';
     }

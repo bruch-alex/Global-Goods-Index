@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<MenuBar>
-    <Menu mnemonicParsing="false" text="BarChart Settings">
-        <CheckMenuItem mnemonicParsing="false" text="Substract average rent"/>
-        <MenuItem mnemonicParsing="false" text="Something else"/>
+<MenuBar xmlns:fx="http://javafx.com/fxml"
+         fx:controller="org.example.globalgoodsindex.controllers.MenuBarController">
+    <Menu fx:id="settingsMenu" mnemonicParsing="false">
+        <CheckMenuItem fx:id="substructAverageRentOption" mnemonicParsing="false"/>
     </Menu>
-    <Menu mnemonicParsing="false" text="View">
-        <Menu mnemonicParsing="false" text="Theme">
+    <Menu fx:id="viewMenu" mnemonicParsing="false">
+        <Menu fx:id="themeMenu" mnemonicParsing="false">
             <MenuItem mnemonicParsing="false" text="Theme 1"/>
             <MenuItem mnemonicParsing="false" text="Theme 2"/>
         </Menu>
-        <Menu mnemonicParsing="false" text="Language">
-            <MenuItem mnemonicParsing="false" text="English"/>
-            <MenuItem mnemonicParsing="false" text="Deutsch"/>
-        </Menu>
-        <CheckMenuItem mnemonicParsing="false" text="Hide Menu (ctrl + h)"/>
+        <fx:include source="language-selector.fxml"/>
     </Menu>
-    <Menu mnemonicParsing="false" text="Help">
-        <MenuItem mnemonicParsing="false" text="About"/>
-        <MenuItem mnemonicParsing="false" text="Github link"/>
+    <Menu fx:id="helpMenu" mnemonicParsing="false">
+        <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false"/>
+        <MenuItem fx:id="githubMenuItem" mnemonicParsing="false"/>
     </Menu>
 </MenuBar>
