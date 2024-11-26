@@ -6,7 +6,7 @@ import javafx.scene.control.ToggleGroup;
 import org.example.globalgoodsindex.core.services.ThemeManager;
 import org.example.globalgoodsindex.core.services.UserPreferencesManager;
 
-public class MenuBarController2 {
+public class MenuThemeSwitcherController {
 
     @FXML
     private RadioMenuItem lightThemeMenuItem;
@@ -24,7 +24,6 @@ public class MenuBarController2 {
 
     @FXML
     public void initialize() {
-        // initialize ThemeManager
         UserPreferencesManager preferencesManager = new UserPreferencesManager();
         themeManager = new ThemeManager(preferencesManager);
 
@@ -65,5 +64,3 @@ public class MenuBarController2 {
         });
     }
 }
-
-

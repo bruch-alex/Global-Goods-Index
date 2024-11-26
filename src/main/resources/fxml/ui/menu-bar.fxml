@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 
-<MenuBar xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="org.example.globalgoodsindex.controllers.MenuBarController2">
+<MenuBar xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
     <Menu mnemonicParsing="false" text="BarChart Settings">
         <CheckMenuItem mnemonicParsing="false" text="Subtract average rent"/>
@@ -11,17 +10,14 @@
     </Menu>
 
     <Menu mnemonicParsing="false" text="View">
-        <Menu mnemonicParsing="false" text="Theme">
-            <RadioMenuItem fx:id="lightThemeMenuItem" text="Primer Light" />
-            <RadioMenuItem fx:id="darkThemeMenuItem" text="Primer Dark" />
-            <RadioMenuItem fx:id="nordLightThemeMenuItem" text="Nord Light" />
-            <RadioMenuItem fx:id="nordDarkThemeMenuItem" text="Nord Dark" />
-        </Menu>
+
+        <fx:include source="themeSwitcher/menu-theme-switcher.fxml"/>
 
         <Menu mnemonicParsing="false" text="Language">
             <MenuItem mnemonicParsing="false" text="English"/>
             <MenuItem mnemonicParsing="false" text="Deutsch"/>
         </Menu>
+
 
         <CheckMenuItem mnemonicParsing="false" text="Hide Menu (ctrl + h)"/>
     </Menu>
