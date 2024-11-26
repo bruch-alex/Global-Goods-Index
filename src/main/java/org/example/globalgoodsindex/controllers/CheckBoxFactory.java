@@ -22,7 +22,6 @@ public class CheckBoxFactory extends ListCell<Entry> {
                     // debugging
                     System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
                     System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
-
                 }
             });
 

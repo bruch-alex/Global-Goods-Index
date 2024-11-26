@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckMenuItem?>
+
 <?import javafx.scene.control.Menu?>
-
-
+<?import javafx.scene.control.RadioMenuItem?>
 <Menu fx:id="languageSelector"
       xmlns="http://javafx.com/javafx/"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.globalgoodsindex.controllers.LanguageSelectorController">
-   <CheckMenuItem fx:id="englishMenuItem"  />
-   <CheckMenuItem fx:id="germanMenuItem"  />
+    <RadioMenuItem fx:id="englishMenuItem"/>
+    <RadioMenuItem fx:id="germanMenuItem"/>
 </Menu>

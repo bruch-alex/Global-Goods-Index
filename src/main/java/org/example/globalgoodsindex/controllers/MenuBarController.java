@@ -1,6 +1,5 @@
 package org.example.globalgoodsindex.controllers;
 
-import eu.hansolo.tilesfx.tools.PrettyListView;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
@@ -34,7 +33,7 @@ public class MenuBarController {
         helpMenu.textProperty().bind(I18N.createStringBinding("help"));
         aboutMenuItem.textProperty().bind(I18N.createStringBinding("about"));
         githubMenuItem.textProperty().bind(I18N.createStringBinding("visit_github"));
-        githubMenuItem.setOnAction(_ ->openWebsite("https://github.com/bruch-alex/Global-Goods-Index"));
+        githubMenuItem.setOnAction(_ -> openWebsite("https://github.com/bruch-alex/Global-Goods-Index"));
     }
 
     private void openWebsite(String url) {
