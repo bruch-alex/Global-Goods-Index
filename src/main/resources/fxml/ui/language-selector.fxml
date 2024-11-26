@@ -9,4 +9,5 @@
       fx:controller="org.example.globalgoodsindex.controllers.LanguageSelectorController">
     <RadioMenuItem fx:id="englishMenuItem"/>
     <RadioMenuItem fx:id="germanMenuItem"/>
+    <RadioMenuItem fx:id="russianMenuItem"/>
 </Menu>
