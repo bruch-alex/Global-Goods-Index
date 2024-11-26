@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+
+<Menu xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.globalgoodsindex.controllers.MenuThemeSwitcher" text="Theme">
+    <MenuItem fx:id="lightThemeMenuItem" text="Light Theme" onAction="#onLightThemeSelected"/>
+    <MenuItem fx:id="darkThemeMenuItem" text="Dark Theme" onAction="#onDarkThemeSelected"/>
+</Menu>
