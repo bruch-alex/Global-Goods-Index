@@ -4,7 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.example.globalgoodsindex.controllers.I18N;
+import org.example.globalgoodsindex.core.services.L10N;
 
 public abstract class Entry {
     protected final String name;
@@ -14,7 +14,7 @@ public abstract class Entry {
     public Entry(String name) {
         this.name = name;
         this.nameProperty = new SimpleStringProperty();
-        this.nameProperty.bind(I18N.createStringBinding(name));
+        this.nameProperty.bind(L10N.createStringBinding(name));
         this.selectedProperty = new SimpleBooleanProperty(false);
     }
 

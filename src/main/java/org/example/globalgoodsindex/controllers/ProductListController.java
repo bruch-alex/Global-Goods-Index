@@ -4,8 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import org.example.globalgoodsindex.Main;
 import org.example.globalgoodsindex.core.models.Entry;
+import org.example.globalgoodsindex.core.models.Product;
+import org.example.globalgoodsindex.core.services.L10N;
+
+import java.util.List;
 
 public class ProductListController {
     @FXML
@@ -15,13 +20,28 @@ public class ProductListController {
     private Label productsLabel;
 
     @FXML
+    private TextField productSearchField;
+
+    @FXML
     public void initialize() {
+        bindStrings();
         productList.setItems(FXCollections.observableArrayList(Main.dataHandler.getProducts()));
         productList.setCellFactory(_ -> new CheckBoxFactory());
+
+        productSearchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            List<Product> filteredData = Main.dataHandler.getProducts().stream()
+                    .filter(item -> L10N.get(item.getName()).toLowerCase().contains(newValue.toLowerCase()))
+                    .toList();
+
+            productList.getItems().clear();
+            productList.setItems(FXCollections.observableArrayList(filteredData));
+            productList.setCellFactory(_ -> new CheckBoxFactory());
+        }));
     }
 
     @FXML
     private void bindStrings() {
-        productsLabel.textProperty().bind(I18N.createStringBinding("products"));
+        productsLabel.textProperty().bind(L10N.createStringBinding("products"));
+        productSearchField.promptTextProperty().bind(L10N.createStringBinding("search"));
     }
 }

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import org.example.globalgoodsindex.core.services.L10N;
 
 import java.util.Locale;
 
@@ -37,18 +38,18 @@ public class LanguageSelectorController {
 
     public void changeLanguage(String language) {
         switch (language) {
-            case "de" -> I18N.setLocale(new Locale("de"));
-            case "ru" -> I18N.setLocale(new Locale("ru"));
-            default -> I18N.setLocale(new Locale("en"));
+            case "de" -> L10N.setLocale(new Locale("de"));
+            case "ru" -> L10N.setLocale(new Locale("ru"));
+            default -> L10N.setLocale(new Locale("en"));
         }
     }
 
     @FXML
     private void bindStrings() {
-        languageSelector.textProperty().bind(I18N.createStringBinding("language"));
-        englishMenuItem.textProperty().bind(I18N.createStringBinding("english"));
-        germanMenuItem.textProperty().bind(I18N.createStringBinding("german"));
-        russianMenuItem.textProperty().bind(I18N.createStringBinding("russian"));
+        languageSelector.textProperty().bind(L10N.createStringBinding("language"));
+        englishMenuItem.textProperty().bind(L10N.createStringBinding("english"));
+        germanMenuItem.textProperty().bind(L10N.createStringBinding("german"));
+        russianMenuItem.textProperty().bind(L10N.createStringBinding("russian"));
     }
 
 }

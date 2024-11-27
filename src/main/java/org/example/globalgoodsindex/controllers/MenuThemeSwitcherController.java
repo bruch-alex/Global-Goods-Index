@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import org.example.globalgoodsindex.core.services.L10N;
 import org.example.globalgoodsindex.core.services.ThemeManager;
 import org.example.globalgoodsindex.core.services.UserPreferencesManager;
 
@@ -71,6 +72,6 @@ public class MenuThemeSwitcherController {
 
     @FXML
     private void bindStrings() {
-        themeSwitcher.textProperty().bind(I18N.createStringBinding("theme"));
+        themeSwitcher.textProperty().bind(L10N.createStringBinding("theme"));
     }
 }

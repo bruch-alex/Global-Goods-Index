@@ -4,6 +4,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import org.example.globalgoodsindex.core.services.L10N;
 
 import java.awt.*;
 import java.net.URI;
@@ -32,11 +33,11 @@ public class MenuBarController {
 
     @FXML
     private void bindStrings(){
-        settingsMenu.textProperty().bind(I18N.createStringBinding("settings"));
-        viewMenu.textProperty().bind(I18N.createStringBinding("view"));
-        helpMenu.textProperty().bind(I18N.createStringBinding("help"));
-        aboutMenuItem.textProperty().bind(I18N.createStringBinding("about"));
-        githubMenuItem.textProperty().bind(I18N.createStringBinding("visit_github"));
+        settingsMenu.textProperty().bind(L10N.createStringBinding("settings"));
+        viewMenu.textProperty().bind(L10N.createStringBinding("view"));
+        helpMenu.textProperty().bind(L10N.createStringBinding("help"));
+        aboutMenuItem.textProperty().bind(L10N.createStringBinding("about"));
+        githubMenuItem.textProperty().bind(L10N.createStringBinding("visit_github"));
     }
 
     private void openWebsite(String url) {
