@@ -20,5 +20,4 @@
         <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false"/>
         <MenuItem fx:id="githubMenuItem" mnemonicParsing="false"/>
     </Menu>
-  
 </MenuBar>

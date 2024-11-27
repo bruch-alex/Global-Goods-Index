@@ -10,6 +10,7 @@ import javafx.util.Duration;
 import org.example.globalgoodsindex.Main;
 import org.example.globalgoodsindex.core.models.Product;
 import org.example.globalgoodsindex.core.models.Salaries;
+import org.example.globalgoodsindex.core.services.L10N;
 
 public class BarChartController {
 
@@ -30,8 +31,8 @@ public class BarChartController {
 
     @FXML
     private void bindStrings(){
-        xAxis.labelProperty().bind(I18N.createStringBinding("country"));
-        yAxis.labelProperty().bind(I18N.createStringBinding("amount"));
+        xAxis.labelProperty().bind(L10N.createStringBinding("country"));
+        yAxis.labelProperty().bind(L10N.createStringBinding("amount"));
     }
 
     @FXML

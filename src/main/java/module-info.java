@@ -11,4 +11,5 @@ module org.example.globalgoodsindex {
     opens org.example.globalgoodsindex.controllers to javafx.fxml;
 
     exports org.example.globalgoodsindex;
+    opens org.example.globalgoodsindex.core.services to javafx.fxml;
 }
