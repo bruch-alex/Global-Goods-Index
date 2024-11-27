@@ -23,10 +23,15 @@ public class BarChartController {
 
     @FXML
     public void initialize() {
-        xAxis.labelProperty().bind(I18N.createStringBinding("country"));
-        yAxis.labelProperty().bind(I18N.createStringBinding("amount"));
+        bindStrings();
         setupProductListeners();
         setupSalariesListeners();
+    }
+
+    @FXML
+    private void bindStrings(){
+        xAxis.labelProperty().bind(I18N.createStringBinding("country"));
+        yAxis.labelProperty().bind(I18N.createStringBinding("amount"));
     }
 
     @FXML

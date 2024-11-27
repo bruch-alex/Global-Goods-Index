@@ -18,8 +18,12 @@ public class CountryListController {
 
     @FXML
     public void initialize() {
-        labelCountries.textProperty().bind(I18N.createStringBinding("countries"));
         countryList.setItems(FXCollections.observableArrayList(Main.dataHandler.getSalaries()));
         countryList.setCellFactory(_ -> new CheckBoxFactory());
+    }
+
+    @FXML
+    private void bindStrings(){
+        labelCountries.textProperty().bind(I18N.createStringBinding("countries"));
     }
 }

@@ -25,17 +25,13 @@ public class LanguageSelectorController {
         germanMenuItem.setToggleGroup(languageToggleGroup);
         russianMenuItem.setToggleGroup(languageToggleGroup);
 
-        languageSelector.textProperty().bind(I18N.createStringBinding("language"));
-        englishMenuItem.textProperty().bind(I18N.createStringBinding("english"));
+        bindStrings();
         englishMenuItem.setSelected(true);
-        germanMenuItem.textProperty().bind(I18N.createStringBinding("german"));
-        russianMenuItem.textProperty().bind(I18N.createStringBinding("russian"));
 
         languageToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == englishMenuItem) changeLanguage("en");
             else if (newValue == germanMenuItem) changeLanguage("de");
             else if (newValue == russianMenuItem) changeLanguage("ru");
-
         });
     }
 
@@ -45,6 +41,14 @@ public class LanguageSelectorController {
             case "ru" -> I18N.setLocale(new Locale("ru"));
             default -> I18N.setLocale(new Locale("en"));
         }
+    }
+
+    @FXML
+    private void bindStrings() {
+        languageSelector.textProperty().bind(I18N.createStringBinding("language"));
+        englishMenuItem.textProperty().bind(I18N.createStringBinding("english"));
+        germanMenuItem.textProperty().bind(I18N.createStringBinding("german"));
+        russianMenuItem.textProperty().bind(I18N.createStringBinding("russian"));
     }
 
 }

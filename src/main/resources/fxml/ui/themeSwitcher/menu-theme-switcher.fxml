@@ -3,7 +3,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.RadioMenuItem?>
 
-<Menu fx:id="themeSwitcher" xmlns="http://javafx.com/javafx/"
+<Menu fx:id="themeSwitcher"
+      xmlns="http://javafx.com/javafx/"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.globalgoodsindex.controllers.MenuThemeSwitcherController">
     <RadioMenuItem fx:id="lightThemeMenuItem" text="Primer Light"/>
