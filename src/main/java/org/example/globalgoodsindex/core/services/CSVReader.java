@@ -22,7 +22,7 @@ public class CSVReader {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 2) {
-                    String name = data[0];
+                    String name = data[0].replace(" ","_");
                     double number = Double.parseDouble(data[1].trim());
                     lines.add(new Salaries(name, number));
                 }

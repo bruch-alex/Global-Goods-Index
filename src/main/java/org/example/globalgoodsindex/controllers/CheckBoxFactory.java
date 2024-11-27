@@ -13,7 +13,7 @@ public class CheckBoxFactory extends ListCell<Entry> {
             setGraphic(null);
         } else {
             CheckBox checkBox = new CheckBox();
-            checkBox.setText(entry.getName());
+            checkBox.textProperty().bind(I18N.createStringBinding(entry.getName()));
             checkBox.selectedProperty().bindBidirectional(entry.selectedProperty());
 
             // Listener for debugging only
@@ -22,7 +22,6 @@ public class CheckBoxFactory extends ListCell<Entry> {
                     // debugging
                     System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
                     System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
-
                 }
             });
 

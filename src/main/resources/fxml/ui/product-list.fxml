@@ -8,7 +8,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.globalgoodsindex.controllers.ProductListController">
 
-    <Label text="Products"/>
+    <Label fx:id="productsLabel" />
     <ListView fx:id="productList" prefHeight="300.0" prefWidth="300.0"/>
 
     <opaqueInsets>

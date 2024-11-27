@@ -9,7 +9,7 @@
       xmlns="http://javafx.com/javafx/"
       fx:controller="org.example.globalgoodsindex.controllers.CountryListController">
 
-    <Label text="Countries"/>
+    <Label fx:id="labelCountries"/>
     <ListView fx:id="countryList" prefHeight="300.0" prefWidth="300.0"/>
 
     <opaqueInsets>
