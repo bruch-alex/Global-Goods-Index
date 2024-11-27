@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import org.example.globalgoodsindex.Main;
 import org.example.globalgoodsindex.core.models.Entry;
 import org.example.globalgoodsindex.core.models.Product;
+import org.example.globalgoodsindex.core.services.L10N;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ProductListController {
 
         productSearchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             List<Product> filteredData = Main.dataHandler.getProducts().stream()
-                    .filter(item -> I18N.get(item.getName()).toLowerCase().contains(newValue.toLowerCase()))
+                    .filter(item -> L10N.get(item.getName()).toLowerCase().contains(newValue.toLowerCase()))
                     .toList();
 
             productList.getItems().clear();
@@ -40,7 +41,7 @@ public class ProductListController {
 
     @FXML
     private void bindStrings() {
-        productsLabel.textProperty().bind(I18N.createStringBinding("products"));
-        productSearchField.promptTextProperty().bind(I18N.createStringBinding("search"));
+        productsLabel.textProperty().bind(L10N.createStringBinding("products"));
+        productSearchField.promptTextProperty().bind(L10N.createStringBinding("search"));
     }
 }

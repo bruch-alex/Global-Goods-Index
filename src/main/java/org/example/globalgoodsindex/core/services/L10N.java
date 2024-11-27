@@ -1,4 +1,4 @@
-package org.example.globalgoodsindex.controllers;
+package org.example.globalgoodsindex.core.services;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.text.MessageFormat;
 import java.util.*;
 
-public final class I18N {
+public final class L10N {
     private static final ObjectProperty<Locale> locale;
 
     static {
@@ -52,21 +52,28 @@ public final class I18N {
      * gets the string with the given key from the resource bundle for the current locale and uses it as first argument
      * to MessageFormat.format, passing in the optional args and returning the result.
      *
-     * @param key
-     *         message key
-     * @param args
-     *         optional arguments for the message
+     * @param key  message key
+     * @param args optional arguments for the message
      * @return localized formatted string
      */
     public static String get(final String key, final Object... args) {
-        ResourceBundle bundle = ResourceBundle.getBundle("l18n/strings", getLocale());
-        return MessageFormat.format(bundle.getString(key), args);
+        ResourceBundle countries = ResourceBundle.getBundle("L10n/" + getLocale().getISO3Language()+ "/countries", getLocale());
+        ResourceBundle products = ResourceBundle.getBundle("L10n/" + getLocale().getISO3Language() + "/products", getLocale());
+        ResourceBundle ui = ResourceBundle.getBundle("L10n/" + getLocale().getISO3Language() + "/ui", getLocale());
+
+        ArrayList<ResourceBundle> bundles = new ArrayList<>(List.of(
+                countries, products, ui
+        ));
+        for (var bundle : bundles){
+            if (bundle.containsKey(key)) return MessageFormat.format(bundle.getString(key), args);
+        }
+        return null;
     }
+
     /**
      * creates a String binding to a localized String for the given message bundle key
      *
-     * @param key
-     *         key
+     * @param key key
      * @return String binding
      */
     public static StringBinding createStringBinding(final String key, Object... args) {

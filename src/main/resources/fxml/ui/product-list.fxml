@@ -3,17 +3,19 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
-<VBox alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10.0"
+      xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/22.0.1"
       fx:controller="org.example.globalgoodsindex.controllers.ProductListController">
 
-    <TextField fx:id="productSearchField"/>
     <Label fx:id="productsLabel" />
-    <ListView fx:id="productList" prefHeight="300.0" prefWidth="300.0"/>
+    <TextField fx:id="productSearchField" />
+    <ListView fx:id="productList" prefHeight="300.0" prefWidth="300.0" />
 
     <opaqueInsets>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </opaqueInsets>
 </VBox>

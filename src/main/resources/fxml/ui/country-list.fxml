@@ -3,16 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.TextField?>
-<VBox alignment="TOP_CENTER"
+<VBox alignment="TOP_CENTER" spacing="10.0"
       xmlns="http://javafx.com/javafx/22.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.globalgoodsindex.controllers.CountryListController">
 
-    <TextField fx:id="countrySearchField"/>
     <Label fx:id="labelCountries" />
+    <TextField fx:id="countrySearchField" />
     <ListView fx:id="countryList" prefHeight="300.0" prefWidth="300.0" />
 
     <opaqueInsets>
