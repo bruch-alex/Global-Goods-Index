@@ -12,4 +12,12 @@ public class Salaries extends Entry {
     public double getSalary() {
         return salary;
     }
+
+    @Override
+    public String toString() {
+        return "Salaries{" +
+                "name='" + getName() + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
