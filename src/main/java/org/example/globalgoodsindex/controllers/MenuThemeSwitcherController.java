@@ -1,6 +1,7 @@
 package org.example.globalgoodsindex.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import org.example.globalgoodsindex.core.services.ThemeManager;
@@ -8,6 +9,8 @@ import org.example.globalgoodsindex.core.services.UserPreferencesManager;
 
 public class MenuThemeSwitcherController {
 
+    @FXML
+    private Menu themeSwitcher;
     @FXML
     private RadioMenuItem lightThemeMenuItem;
 
@@ -24,6 +27,8 @@ public class MenuThemeSwitcherController {
 
     @FXML
     public void initialize() {
+        bindStrings();
+
         UserPreferencesManager preferencesManager = new UserPreferencesManager();
         themeManager = new ThemeManager(preferencesManager);
 
@@ -62,5 +67,10 @@ public class MenuThemeSwitcherController {
                 themeManager.applyTheme("NordDark");
             }
         });
+    }
+
+    @FXML
+    private void bindStrings() {
+        themeSwitcher.textProperty().bind(I18N.createStringBinding("theme"));
     }
 }

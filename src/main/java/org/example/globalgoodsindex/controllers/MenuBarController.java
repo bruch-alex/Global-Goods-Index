@@ -11,10 +11,9 @@ import java.net.URI;
 public class MenuBarController {
     @FXML
     private Menu settingsMenu;
+
     @FXML
     private Menu viewMenu;
-    @FXML
-    private Menu themeMenu;
 
     @FXML
     private Menu helpMenu;
@@ -27,13 +26,17 @@ public class MenuBarController {
 
     @FXML
     private void initialize() {
+        bindStrings();
+        githubMenuItem.setOnAction(_ -> openWebsite("https://github.com/bruch-alex/Global-Goods-Index"));
+    }
+
+    @FXML
+    private void bindStrings(){
         settingsMenu.textProperty().bind(I18N.createStringBinding("settings"));
         viewMenu.textProperty().bind(I18N.createStringBinding("view"));
-        themeMenu.textProperty().bind(I18N.createStringBinding("theme"));
         helpMenu.textProperty().bind(I18N.createStringBinding("help"));
         aboutMenuItem.textProperty().bind(I18N.createStringBinding("about"));
         githubMenuItem.textProperty().bind(I18N.createStringBinding("visit_github"));
-        githubMenuItem.setOnAction(_ -> openWebsite("https://github.com/bruch-alex/Global-Goods-Index"));
     }
 
     private void openWebsite(String url) {

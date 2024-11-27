@@ -16,8 +16,12 @@ public class ProductListController {
 
     @FXML
     public void initialize() {
-        productsLabel.textProperty().bind(I18N.createStringBinding("products"));
         productList.setItems(FXCollections.observableArrayList(Main.dataHandler.getProducts()));
         productList.setCellFactory(_ -> new CheckBoxFactory());
+    }
+
+    @FXML
+    private void bindStrings() {
+        productsLabel.textProperty().bind(I18N.createStringBinding("products"));
     }
 }

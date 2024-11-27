@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 
 <MenuBar xmlns="http://javafx.com/javafx/22.0.1" 
-         xmlns:fx="http://javafx.com/fxml/1">
+         xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="org.example.globalgoodsindex.controllers.MenuBarController">
 
     <Menu fx:id="settingsMenu" mnemonicParsing="false">
