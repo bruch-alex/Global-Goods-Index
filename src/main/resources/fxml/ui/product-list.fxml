@@ -4,10 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
 <VBox alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.globalgoodsindex.controllers.ProductListController">
 
+    <TextField fx:id="productSearchField"/>
     <Label fx:id="productsLabel" />
     <ListView fx:id="productList" prefHeight="300.0" prefWidth="300.0"/>
 

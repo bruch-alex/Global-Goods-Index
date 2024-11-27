@@ -11,11 +11,8 @@
     </Menu>
 
     <Menu fx:id="viewMenu" mnemonicParsing="false" >
-
         <fx:include source="themeSwitcher/menu-theme-switcher.fxml"/>
-
         <fx:include source="language-selector.fxml"/>
-
         <CheckMenuItem mnemonicParsing="false" text="Hide Menu (ctrl + h)"/>
     </Menu>
 
