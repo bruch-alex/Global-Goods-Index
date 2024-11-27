@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<MenuBar>
+
+<MenuBar xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
     <Menu mnemonicParsing="false" text="BarChart Settings">
-        <CheckMenuItem mnemonicParsing="false" text="Substract average rent"/>
+        <CheckMenuItem mnemonicParsing="false" text="Subtract average rent"/>
         <MenuItem mnemonicParsing="false" text="Something else"/>
     </Menu>
+
     <Menu mnemonicParsing="false" text="View">
-        <Menu mnemonicParsing="false" text="Theme">
-            <MenuItem mnemonicParsing="false" text="Theme 1"/>
-            <MenuItem mnemonicParsing="false" text="Theme 2"/>
-        </Menu>
+
+        <fx:include source="themeSwitcher/menu-theme-switcher.fxml"/>
+
         <Menu mnemonicParsing="false" text="Language">
             <MenuItem mnemonicParsing="false" text="English"/>
             <MenuItem mnemonicParsing="false" text="Deutsch"/>
         </Menu>
+
+
         <CheckMenuItem mnemonicParsing="false" text="Hide Menu (ctrl + h)"/>
     </Menu>
+
     <Menu mnemonicParsing="false" text="Help">
         <MenuItem mnemonicParsing="false" text="About"/>
-        <MenuItem mnemonicParsing="false" text="Github link"/>
+        <MenuItem mnemonicParsing="false" text="GitHub link"/>
     </Menu>
 </MenuBar>
