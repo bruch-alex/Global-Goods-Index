@@ -4,15 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TextField?>
 <VBox alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx/22.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/"
       fx:controller="org.example.globalgoodsindex.controllers.CountryListController">
 
-    <Label fx:id="labelCountries"/>
-    <ListView fx:id="countryList" prefHeight="300.0" prefWidth="300.0"/>
+    <TextField fx:id="countrySearchField"/>
+    <Label fx:id="labelCountries" />
+    <ListView fx:id="countryList" prefHeight="300.0" prefWidth="300.0" />
 
     <opaqueInsets>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </opaqueInsets>
 </VBox>
