@@ -13,6 +13,7 @@ public class CSVReader {
 
         if (inputStream == null) {
             System.out.println("File not found in resources");
+            return null;
         }
 
         ObservableList<Salaries> lines = FXCollections.observableArrayList();
