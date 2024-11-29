@@ -20,7 +20,6 @@ public class CheckBoxFactory extends ListCell<Entry> {
             // Listener for debugging only
             checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
                 if (newValue || oldValue) {
-                    // debugging
                     System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
                     System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
                 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.*;
 import java.util.*;
 import java.util.stream.Stream;
@@ -31,21 +32,27 @@ public class DataHandler {
      */
     private void populateProducts() {
         URI uri;
+        URL url = getClass().getResource("/data/products/apples.txt");
+        if (url == null){
+            System.out.println("url is null");
+            return;
+        }
         try {
-            uri = getClass().getResource("/data/products/").toURI();
+            uri = url.toURI();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
         Path myPath;
         FileSystem fs;
         if (uri.getScheme().equals("jar")){
+            System.out.println("Scheme is JAR");
             try {
                 fs = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
                 myPath = fs.getPath("/data/products");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else myPath = Paths.get(uri);
+        } else myPath = Paths.get(uri).getParent();
         Stream<Path> walk;
         try {
             walk = Files.walk(myPath,1);

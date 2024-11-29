@@ -8,7 +8,7 @@
 
 <VBox alignment="CENTER" spacing="10.0"
       xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/22.0.1"
+      xmlns="http://javafx.com/javafx/"
       fx:controller="org.example.globalgoodsindex.controllers.ProductListController">
 
     <Label fx:id="productsLabel" />

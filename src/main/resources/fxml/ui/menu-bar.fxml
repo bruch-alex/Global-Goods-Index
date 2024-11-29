@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 
-<MenuBar xmlns="http://javafx.com/javafx/22.0.1" 
+<MenuBar xmlns="http://javafx.com/javafx/"
          xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="org.example.globalgoodsindex.controllers.MenuBarController">
 

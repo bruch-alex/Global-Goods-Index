@@ -62,8 +62,7 @@ public class BarChartController {
 
     private void addProductToChart(Product product) {
         XYChart.Series<String, Number> productSeries = new XYChart.Series<>();
-        productSeries.setName(product.getName());
-
+        productSeries.nameProperty().bind(L10N.createStringBinding(product.getName()));
         for (Salaries salaries : Main.dataHandler.getSalaries()) {
             if (salaries.isSelected()) {
                 addDataPoint(productSeries, product, salaries);
@@ -74,7 +73,7 @@ public class BarChartController {
     }
 
     private void removeProductFromChart(Product product) {
-        barChart.getData().removeIf(series -> series.getName().equals(product.getName()));
+        barChart.getData().removeIf(series -> series.getName().equals(L10N.get(product.getName())));
     }
 
     private void addSalariesToChart(Salaries salaries) {
@@ -90,7 +89,7 @@ public class BarChartController {
 
     private void removeSalariesFromChart(Salaries salaries) {
         for (XYChart.Series<String, Number> series : barChart.getData()) {
-            series.getData().removeIf(data -> data.getXValue().equals(salaries.getName()));
+            series.getData().removeIf(data -> data.getXValue().equals(L10N.get(salaries.getName())));
         }
     }
 
@@ -99,7 +98,10 @@ public class BarChartController {
         double salaryValue = salary.getSalary();
         int productsCount = (int) (salaryValue / price);
 
-        XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(salary.getName(), (double) productsCount);
+        XYChart.Data<String, Number> dataPoint = new XYChart.Data<>();
+
+        dataPoint.XValueProperty().bind(L10N.createStringBinding(salary.getName()));
+        dataPoint.setYValue((double) productsCount);
         series.getData().add(dataPoint);
 
         dataPoint.nodeProperty().addListener((observable, oldNode, newNode) -> {
@@ -113,7 +115,7 @@ public class BarChartController {
 
     private Product findProductByName(String name) {
         for (Product product : Main.dataHandler.getProducts()) {
-            if (product.getName().equals(name)) {
+            if (L10N.get(product.getName()).equals(name)) {
                 return product;
             }
         }
