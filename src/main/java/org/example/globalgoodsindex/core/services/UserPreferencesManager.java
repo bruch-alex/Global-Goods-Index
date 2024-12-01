@@ -14,15 +14,14 @@ public class UserPreferencesManager {
 
     // Theme Preferences
     public void saveTheme(String themeName) {
-        System.out.println("debug: current themeName: " + themeName);
         preferences.put(THEME_KEY, themeName);
     }
 
     public String getTheme() {
-        return preferences.get(THEME_KEY, "PrimerLight"); // Default to PrimerLight
+        return preferences.get(THEME_KEY, "PrimerLight");
     }
 
-    // Language Preferences
+    //TODO: Set Language Preferences
     public void saveLanguage(String language) {
         preferences.put(LANGUAGE_KEY, language);
     }

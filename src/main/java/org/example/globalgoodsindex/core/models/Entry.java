@@ -23,7 +23,8 @@ public abstract class Entry {
     }
 
     public String getLocalizedName() {
-        return this.name;
+        String normalizedKey = this.name.replace(" ", "_");
+        return L10N.get(normalizedKey);
     }
 
     public StringProperty nameProperty() {

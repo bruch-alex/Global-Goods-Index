@@ -15,14 +15,16 @@ public class CheckBoxFactory extends ListCell<Entry> {
         } else {
             CheckBox checkBox = new CheckBox();
             checkBox.textProperty().bind(L10N.createStringBinding(entry.getName()));
+
+            // TODO:  Uncheck the product in the UI when no price data is available
+            checkBox.selectedProperty().unbind();
             checkBox.selectedProperty().bindBidirectional(entry.selectedProperty());
 
-            // Listener for debugging only
+            // debugging only
             checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
                 if (newValue || oldValue) {
-                    // debugging
-                    System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
-                    System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
+                    // System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
+                    //System.out.println("Checkbox for: " + entry.getName() + " - Selected: " + entry.isSelected());
                 }
             });
 

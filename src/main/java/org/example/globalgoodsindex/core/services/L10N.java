@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import org.example.globalgoodsindex.core.models.Product;
 
 import java.text.MessageFormat;
 import java.util.*;
@@ -78,5 +79,10 @@ public final class L10N {
      */
     public static StringBinding createStringBinding(final String key, Object... args) {
         return Bindings.createStringBinding(() -> get(key, args), locale);
+    }
+
+    public static StringBinding getShortNameBinding(Product product) {
+        String shortNameKey = product.getName() + ".short";
+        return L10N.createStringBinding(shortNameKey);
     }
 }

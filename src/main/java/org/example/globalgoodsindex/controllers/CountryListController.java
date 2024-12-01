@@ -32,7 +32,7 @@ public class CountryListController {
 
         countrySearchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             List<Salaries> filteredData = Main.dataHandler.getSalaries().stream()
-                    .filter(item -> L10N.get(item.getName()).toLowerCase().contains(newValue.toLowerCase()))
+                    .filter(item -> item.getLocalizedName().toLowerCase().contains(newValue.toLowerCase()))
                     .toList();
 
             countryList.getItems().clear();
@@ -44,7 +44,7 @@ public class CountryListController {
     }
 
     @FXML
-    private void bindStrings(){
+    private void bindStrings() {
         labelCountries.textProperty().bind(L10N.createStringBinding("countries"));
         countrySearchField.promptTextProperty().bind(L10N.createStringBinding("search"));
     }

@@ -23,13 +23,11 @@ public class ThemeManager {
         return isLightTheme;
     }
 
-    // apply the saved theme
     public void applySavedTheme() {
         String savedTheme = preferencesManager.getTheme();
         applyTheme(savedTheme);
     }
 
-    // Apply a specific theme and save it
     public void applyTheme(String themeName) {
         switch (themeName) {
             case "PrimerDark":
