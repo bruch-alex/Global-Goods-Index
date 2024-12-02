@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" prefHeight="800.0" prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/22.0.1"
+            xmlns="http://javafx.com/javafx/"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.globalgoodsindex.controllers.MainController">
 

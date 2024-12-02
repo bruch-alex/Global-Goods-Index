@@ -6,7 +6,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import org.example.globalgoodsindex.core.services.L10N;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.net.URI;
 
 public class MenuBarController {
