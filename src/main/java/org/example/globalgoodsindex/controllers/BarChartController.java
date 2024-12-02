@@ -78,8 +78,8 @@ public class BarChartController {
                     hasValidData = true;
                 } else {
                     triggerToast("No price data available for:\n" +
-                            "- Product = " + shortNameBinding.get() + "\n" +
-                            "- Country = " + salaries.getName());
+                            "Product = " + shortNameBinding.get() + "\n" +
+                            "Country = " + salaries.getName());
 
 
                     // TODO:  Uncheck the product in the UI

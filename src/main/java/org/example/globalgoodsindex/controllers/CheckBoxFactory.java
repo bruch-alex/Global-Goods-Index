@@ -24,7 +24,7 @@ public class CheckBoxFactory extends ListCell<Entry> {
             checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
                 if (newValue || oldValue) {
                     // System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
-                    //System.out.println("Checkbox for: " + entry.getName() + " - Selected: " + entry.isSelected());
+                    System.out.println("Checkbox for: " + entry.getName() + " - Selected: " + entry.isSelected());
                 }
             });
 

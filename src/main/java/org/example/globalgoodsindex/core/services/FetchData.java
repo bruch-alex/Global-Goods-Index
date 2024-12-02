@@ -27,11 +27,12 @@ public class FetchData {
 
                 if (cells.size() >= 3) {
                     String country = cells.get(1).text();
+                    String standardizedCountry = country.replace(" ", "_");
                     String salaryText = cells.get(2).text();
 
                     try {
                         double salary = Double.parseDouble(salaryText.replace(",", "").trim());
-                        salaries.add(new Salaries(country, salary));
+                        salaries.add(new Salaries(standardizedCountry, salary));
                     } catch (NumberFormatException e) {
                         System.err.println("Invalid salary format for country: " + country);
                     }
@@ -96,7 +97,11 @@ public class FetchData {
             if (cells.size() < columnHeaders.size()) continue; // Skip incomplete rows
 
             List<String> rowData = new ArrayList<>();
-            rowData.add(cells.get(1).text().trim());
+
+            // Extract and standardize country name
+            String country = cells.get(1).text().trim();
+            String standardizedCountry = country.replace(" ", "_");
+            rowData.add(standardizedCountry);
 
             for (int i = 2; i < cells.size(); i++) {
                 String price = cells.get(i).text().trim();
