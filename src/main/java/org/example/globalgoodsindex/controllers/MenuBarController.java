@@ -2,11 +2,15 @@ package org.example.globalgoodsindex.controllers;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 import org.example.globalgoodsindex.core.services.L10N;
 
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
 
 public class MenuBarController {
@@ -29,6 +33,7 @@ public class MenuBarController {
     private void initialize() {
         bindStrings();
         githubMenuItem.setOnAction(_ -> openWebsite("https://github.com/bruch-alex/Global-Goods-Index"));
+        aboutMenuItem.setOnAction(_ -> openAboutWindow());
     }
 
     @FXML
@@ -59,5 +64,22 @@ public class MenuBarController {
         Thread t1 = new Thread(openWebSiteTask);
         t1.setDaemon(true);
         t1.start();
+    }
+
+    @FXML
+    private void openAboutWindow() {
+        try {
+            // Load the new window FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ui/about.fxml"));
+            Stage newStage = new Stage();
+            Scene newScene = new Scene(loader.load());
+            newStage.titleProperty().bind(L10N.createStringBinding("about"));
+            // Create a new stage (window) for the new window
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
