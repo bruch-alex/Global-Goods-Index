@@ -43,36 +43,40 @@ public class Main extends Application {
             stage.show();
 
             LoadingScreenController loadingScreenController = loader.getController();
+            if (loadingScreenController == null) {
+                throw new RuntimeException("LoadingScreenController is null. Check FXML file and fx:controller attribute.");
+            }
 
             // Load data
             ScraperManager scraperManager = new ScraperManager();
             String salariesResourcePath = "/data/salaries/salaries.csv";
             String productsResourcePath = "/data/products/products.csv";
 
-            // Check resources
-            URL salariesResourceUrl = getClass().getResource(salariesResourcePath);
-            URL productsResourceUrl = getClass().getResource(productsResourcePath);
-
-            System.out.println("Salaries resource found: " + (salariesResourceUrl != null));
-            System.out.println("Products resource found: " + (productsResourceUrl != null));
-
-
             CompletableFuture<ObservableList<Salaries>> salariesFuture = scraperManager.prepareSalariesAsync(salariesResourcePath);
             CompletableFuture<ObservableList<Product>> productsFuture = scraperManager.prepareProductsAsync(productsResourcePath);
 
             loadingScreenController.bindToProgress(salariesFuture, productsFuture);
 
-            DataHandler.loadDataAsync(salariesResourcePath, productsResourcePath, scraperManager)
-                    .thenAccept(handler -> {
-                        Platform.runLater(() -> {
-                            dataHandler = handler;
-                            initializeUI(stage);
-                        });
-                    })
-                    .exceptionally(ex -> {
-                        System.err.println("Error loading data: " + ex.getMessage());
-                        Platform.exit();
-                        return null;
+            // Wait for both tasks to complete and then transition to main UI
+            CompletableFuture.allOf(salariesFuture, productsFuture)
+                    .thenRun(() -> {
+                        try {
+                            ObservableList<Salaries> salaries = salariesFuture.join();
+                            ObservableList<Product> products = productsFuture.join();
+
+                            if (salaries.isEmpty() || products.isEmpty()) {
+                                throw new RuntimeException("Failed to load data. Please check scraping or CSV paths.");
+                            }
+
+                            dataHandler = new DataHandler(salaries, products);
+                            Platform.runLater(() -> initializeUI(stage));
+                        } catch (Exception e) {
+                            Platform.runLater(() -> {
+                                System.err.println("Error during data loading: " + e.getMessage());
+                                e.printStackTrace();
+                                Platform.exit();
+                            });
+                        }
                     });
         } catch (IOException e) {
             System.err.println("Error loading FXML for loading screen: " + e.getMessage());
