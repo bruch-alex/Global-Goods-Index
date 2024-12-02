@@ -81,12 +81,6 @@ public class BarChartController {
                             "Product = " + shortNameBinding.get() + "\n" +
                             "Country = " + salaries.getName());
 
-
-                    // TODO:  Uncheck the product in the UI
-                    product.setSelected(false);
-
-                    System.out.println("Unchecking product: " + product.getName());
-                    return;
                 }
             }
         }
@@ -95,6 +89,7 @@ public class BarChartController {
             barChart.getData().add(productSeries);
         } else {
             System.out.println("No valid data available for product: " + product.getName());
+            product.setSelected(false);
         }
     }
 
@@ -129,8 +124,8 @@ public class BarChartController {
 
         XYChart.Data<String, Number> dataPoint = new XYChart.Data<>();
 
-        //dataPoint.XValueProperty().bind(L10N.createStringBinding(salary.getName()));
-        dataPoint.XValueProperty().bind(salary.nameProperty());
+        dataPoint.XValueProperty().bind(L10N.createStringBinding(salary.getName()));
+        //dataPoint.XValueProperty().bind(salary.nameProperty());
         dataPoint.setYValue((double) productsCount);
 
         series.getData().add(dataPoint);
@@ -154,7 +149,7 @@ public class BarChartController {
         return null;
     }
 
-    //TODO: implement localization
+    //TODO: implement localization + add product name
     private Tooltip createTooltip(String countryName, double salary, double price, int productsCount) {
         return new Tooltip(
                 "Country: " + countryName + "\n" +

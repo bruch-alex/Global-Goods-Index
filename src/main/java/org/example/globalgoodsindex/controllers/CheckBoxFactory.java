@@ -17,7 +17,7 @@ public class CheckBoxFactory extends ListCell<Entry> {
             checkBox.textProperty().bind(L10N.createStringBinding(entry.getName()));
 
             // TODO:  Uncheck the product in the UI when no price data is available
-            checkBox.selectedProperty().unbind();
+           // checkBox.selectedProperty().unbind();
             checkBox.selectedProperty().bindBidirectional(entry.selectedProperty());
 
             // debugging only

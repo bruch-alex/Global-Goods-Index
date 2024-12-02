@@ -2,27 +2,23 @@ package org.example.globalgoodsindex;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import org.example.globalgoodsindex.controllers.LoadingScreenController;
 import org.example.globalgoodsindex.core.models.DataHandler;
 import org.example.globalgoodsindex.core.models.Product;
 import org.example.globalgoodsindex.core.models.Salaries;
 import org.example.globalgoodsindex.core.services.*;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
+
 import java.util.concurrent.CompletableFuture;
 
 public class Main extends Application {
@@ -36,89 +32,55 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Main.primaryStage = stage;
-        ScraperManager scraperManager = new ScraperManager();
-        String salariesFilePath = "/data/salaries/salaries.csv";
-        String productsFilePath = "/data/products/products.csv";
 
-        VBox loadingBox = new VBox(10);
-        loadingBox.setAlignment(Pos.CENTER);
-        ProgressBar progressBar = new ProgressBar();
-        progressBar.setPrefWidth(300);
-        Label loadingLabel = new Label("Loading data, please wait...");
-        loadingBox.getChildren().addAll(loadingLabel, progressBar);
+        // Show loading screen
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loading.fxml"));
+            VBox loadingBox = loader.load();
+            Scene loadingScene = new Scene(loadingBox, 400, 300);
+            stage.setScene(loadingScene);
+            stage.setTitle("Loading");
+            stage.show();
 
-        Scene loadingScene = new Scene(loadingBox, 400, 300);
-        stage.setScene(loadingScene);
-        stage.setTitle("Loading");
-        stage.show();
+            LoadingScreenController loadingScreenController = loader.getController();
 
-        // Start asynchronous preparation for both salaries and products
-        CompletableFuture<ObservableList<Salaries>> salariesFuture = scraperManager.prepareSalariesAsync(salariesFilePath);
-        CompletableFuture<Map<String, List<Salaries>>> productsFuture = scraperManager.prepareProductsAsync(productsFilePath);
+            // Load data
+            ScraperManager scraperManager = new ScraperManager();
+            String salariesResourcePath = "/data/salaries/salaries.csv";
+            String productsResourcePath = "/data/products/products.csv";
 
-        // Ensure both data sets are fully loaded before proceeding
-        CompletableFuture.allOf(salariesFuture, productsFuture).thenRun(() -> {
-            try {
-                ObservableList<Salaries> salaries = salariesFuture.get();
-                Map<String, List<Salaries>> productsMap = productsFuture.get();
+            // Check resources
+            URL salariesResourceUrl = getClass().getResource(salariesResourcePath);
+            URL productsResourceUrl = getClass().getResource(productsResourcePath);
 
-                if (salaries.isEmpty() || productsMap.isEmpty()) {
-                    System.err.println("Failed to prepare required data. Exiting.");
-                    Platform.exit();
-                    return;
-                }
+            System.out.println("Salaries resource found: " + (salariesResourceUrl != null));
+            System.out.println("Products resource found: " + (productsResourceUrl != null));
 
-                // initialize the UI with prepared data
-                Platform.runLater(() -> {
-                    dataHandler = new DataHandler(salaries, convertProductMapToObservableList(productsMap));
-                    dataHandler.getSalaries().forEach(salary -> {
-                        System.out.println("Name: " + salary.getName() + ", Localized: " + salary.getLocalizedName());
+
+            CompletableFuture<ObservableList<Salaries>> salariesFuture = scraperManager.prepareSalariesAsync(salariesResourcePath);
+            CompletableFuture<ObservableList<Product>> productsFuture = scraperManager.prepareProductsAsync(productsResourcePath);
+
+            loadingScreenController.bindToProgress(salariesFuture, productsFuture);
+
+            DataHandler.loadDataAsync(salariesResourcePath, productsResourcePath, scraperManager)
+                    .thenAccept(handler -> {
+                        Platform.runLater(() -> {
+                            dataHandler = handler;
+                            initializeUI(stage);
+                        });
+                    })
+                    .exceptionally(ex -> {
+                        System.err.println("Error loading data: " + ex.getMessage());
+                        Platform.exit();
+                        return null;
                     });
-                    initializeUI(stage);
-                });
-            } catch (Exception e) {
-                System.err.println("Error while preparing data: " + e.getMessage());
-                e.printStackTrace();
-                Platform.exit();
-            }
-        });
-
-        // show loading progress
-        Task<Void> monitorProgress = new Task<>() {
-            @Override
-            protected Void call() throws InterruptedException {
-                while (!salariesFuture.isDone() || !productsFuture.isDone()) {
-                    if (salariesFuture.isDone()) {
-                        updateMessage("Loading products...");
-                        updateProgress(50, 100);
-                    }
-                    if (productsFuture.isDone()) {
-                        updateMessage("Finishing up...");
-                        updateProgress(100, 100);
-                    }
-                    Thread.sleep(500);
-                }
-                return null;
-            }
-        };
-
-        progressBar.progressProperty().bind(monitorProgress.progressProperty());
-        loadingLabel.textProperty().bind(monitorProgress.messageProperty());
-
-        new Thread(monitorProgress).start();
+        } catch (IOException e) {
+            System.err.println("Error loading FXML for loading screen: " + e.getMessage());
+            e.printStackTrace();
+            Platform.exit();
+        }
     }
 
-
-    private ObservableList<Product> convertProductMapToObservableList(Map<String, List<Salaries>> productsMap) {
-        ObservableList<Product> products = FXCollections.observableArrayList();
-
-        productsMap.forEach((productName, salariesList) -> {
-            Product product = new Product(productName, salariesList);
-            products.add(product);
-        });
-
-        return products;
-    }
 
     private void initializeUI(Stage stage) {
         try {
@@ -140,5 +102,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 }

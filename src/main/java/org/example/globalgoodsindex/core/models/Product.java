@@ -32,6 +32,4 @@ public class Product extends Entry {
         return "Product{name='" + getLocalizedName() + "', prices=" + prices + '}';
     }
 
-
-
 }
