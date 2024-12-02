@@ -1,7 +1,7 @@
 package org.example.globalgoodsindex;
 
-public class AppLauncher {
+public class Launcher {
     public static void main(String[] args) {
-        new Main().run();
+        new App().run();
     }
 }

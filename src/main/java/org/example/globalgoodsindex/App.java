@@ -11,7 +11,7 @@ import org.example.globalgoodsindex.core.services.UserPreferencesManager;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class App extends Application {
     public static DataHandler dataHandler;
 
     public void run() {
@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         dataHandler = new DataHandler();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
         stage.titleProperty().bind(L10N.createStringBinding("appName"));
 
