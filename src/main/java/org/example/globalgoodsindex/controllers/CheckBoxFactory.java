@@ -3,7 +3,6 @@ package org.example.globalgoodsindex.controllers;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
 import org.example.globalgoodsindex.core.models.Entry;
-import org.example.globalgoodsindex.core.services.L10N;
 
 public class CheckBoxFactory extends ListCell<Entry> {
     @Override
@@ -14,14 +13,14 @@ public class CheckBoxFactory extends ListCell<Entry> {
             setGraphic(null);
         } else {
             CheckBox checkBox = new CheckBox();
-            checkBox.textProperty().bind(L10N.createStringBinding(entry.getName()));
+            checkBox.textProperty().bind(entry.nameProperty());
             checkBox.selectedProperty().bindBidirectional(entry.selectedProperty());
 
             // Listener for debugging only
             checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
                 if (newValue || oldValue) {
-                    System.out.println("Changed value for " + checkBox.getText() + " from " + oldValue + " to " + newValue);
-                    System.out.println("Value for " + entry.getName() + " is " + entry.isSelected());
+                    System.out.println("Changed value for checkbox " + checkBox.getText() + " from " + oldValue + " to " + newValue);
+                    System.out.println("Value for instance " + entry.getName() + " is " + entry.isSelected());
                 }
             });
 

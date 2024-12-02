@@ -7,9 +7,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tooltip;
 import javafx.util.Duration;
-import org.example.globalgoodsindex.Main;
+import org.example.globalgoodsindex.App;
 import org.example.globalgoodsindex.core.models.Product;
-import org.example.globalgoodsindex.core.models.Salaries;
+import org.example.globalgoodsindex.core.models.Salary;
 import org.example.globalgoodsindex.core.services.L10N;
 
 public class BarChartController {
@@ -27,17 +27,18 @@ public class BarChartController {
         bindStrings();
         setupProductListeners();
         setupSalariesListeners();
+        setupLanguageChangeListener();
     }
 
     @FXML
-    private void bindStrings(){
+    private void bindStrings() {
         xAxis.labelProperty().bind(L10N.createStringBinding("country"));
         yAxis.labelProperty().bind(L10N.createStringBinding("amount"));
     }
 
-    @FXML
+
     private void setupProductListeners() {
-        for (Product product : Main.dataHandler.getProducts()) {
+        for (Product product : App.dataHandler.getProducts()) {
             product.selectedProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue) {
                     addProductToChart(product);
@@ -49,7 +50,7 @@ public class BarChartController {
     }
 
     private void setupSalariesListeners() {
-        for (Salaries salary : Main.dataHandler.getSalaries()) {
+        for (Salary salary : App.dataHandler.getSalaries()) {
             salary.selectedProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue) {
                     addSalariesToChart(salary);
@@ -60,12 +61,41 @@ public class BarChartController {
         }
     }
 
+    /**
+     * runs refreshUI function after each language change.
+     */
+    @FXML
+    private void setupLanguageChangeListener() {
+        yAxis.labelProperty().addListener((_ -> refreshUI()));
+    }
+
+    /**
+     * <p>Although every nameProperty is bound with corresponding StringProperty of Product or Salary visual bug is appearing
+     * so our team decided to refresh entire UI for now. Maybe can fix later.
+     *
+     * <p>If u want to check the bug: In initialize() method comment out call to the method setupLanguageChangeListener() - line 30
+     */
+    @FXML
+    private void refreshUI() {
+        barChart.getData().clear();
+
+        App.dataHandler.getSalaries().stream()
+                .filter(Salary::isSelected)
+                .forEach(this::addSalariesToChart);
+
+        App.dataHandler.getProducts().stream()
+                .filter(Product::isSelected)
+                .forEach(this::addProductToChart);
+    }
+
     private void addProductToChart(Product product) {
         XYChart.Series<String, Number> productSeries = new XYChart.Series<>();
-        productSeries.nameProperty().bind(L10N.createStringBinding(product.getName()));
-        for (Salaries salaries : Main.dataHandler.getSalaries()) {
-            if (salaries.isSelected()) {
-                addDataPoint(productSeries, product, salaries);
+        productSeries.nameProperty().bind(product.nameProperty());
+
+        for (Salary salary : App.dataHandler.getSalaries()) {
+            if (salary.isSelected()) {
+                System.out.println("add data point");
+                addDataPoint(productSeries, product, salary);
             }
         }
 
@@ -73,34 +103,35 @@ public class BarChartController {
     }
 
     private void removeProductFromChart(Product product) {
-        barChart.getData().removeIf(series -> series.getName().equals(L10N.get(product.getName())));
+        barChart.getData().removeIf(series -> series.nameProperty().getValue().equalsIgnoreCase(product.nameProperty().getValue()));
     }
 
-    private void addSalariesToChart(Salaries salaries) {
+    private void addSalariesToChart(Salary salary) {
         for (XYChart.Series<String, Number> series : barChart.getData()) {
 
-            Product matchedProduct = findProductByName(series.getName());
+            Product matchedProduct = findProductByName(series.nameProperty().getValue());
 
             if (matchedProduct != null) {
-                addDataPoint(series, matchedProduct, salaries);
+                addDataPoint(series, matchedProduct, salary);
+                barChart.requestLayout();
             }
         }
     }
 
-    private void removeSalariesFromChart(Salaries salaries) {
+    private void removeSalariesFromChart(Salary salary) {
         for (XYChart.Series<String, Number> series : barChart.getData()) {
-            series.getData().removeIf(data -> data.getXValue().equals(L10N.get(salaries.getName())));
+            series.getData().removeIf(data -> data.XValueProperty().getValue().equalsIgnoreCase(salary.getName()));
         }
     }
 
-    private void addDataPoint(XYChart.Series<String, Number> series, Product product, Salaries salary) {
+    private void addDataPoint(XYChart.Series<String, Number> series, Product product, Salary salary) {
         double price = product.getPrice(salary.getName());
         double salaryValue = salary.getSalary();
         int productsCount = (int) (salaryValue / price);
 
         XYChart.Data<String, Number> dataPoint = new XYChart.Data<>();
 
-        dataPoint.XValueProperty().bind(L10N.createStringBinding(salary.getName()));
+        dataPoint.XValueProperty().bind(salary.nameProperty());
         dataPoint.setYValue((double) productsCount);
         series.getData().add(dataPoint);
 
@@ -114,8 +145,8 @@ public class BarChartController {
     }
 
     private Product findProductByName(String name) {
-        for (Product product : Main.dataHandler.getProducts()) {
-            if (L10N.get(product.getName()).equals(name)) {
+        for (Product product : App.dataHandler.getProducts()) {
+            if (product.nameProperty().getValue().equalsIgnoreCase(name)) {
                 return product;
             }
         }
@@ -124,10 +155,10 @@ public class BarChartController {
 
     private Tooltip createTooltip(String countryName, double salary, double price, int productsCount) {
         return new Tooltip(
-                "Country: " + countryName + "\n" +
-                        "Average Salary: $" + salary + "\n" +
-                        "Product Price: $" + price + "\n" +
-                        "Product Purchasable: " + productsCount
+                L10N.get("country") + ": " + countryName + "\n" +
+                        L10N.get("average_salary") + ": " + salary + "\n" +
+                        L10N.get("product_price") + ": " + price + "\n" +
+                        L10N.get("product_purchasable") + ": " + productsCount
         );
     }
 }

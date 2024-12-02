@@ -4,20 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.globalgoodsindex.core.services.CSVReader;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 
 public class DataHandler {
 
-    private final ObservableList<Salaries> salaries;
+    private final ObservableList<Salary> salaries;
     private final ObservableList<Product> products;
 
 
@@ -33,7 +32,7 @@ public class DataHandler {
     private void populateProducts() {
         URI uri;
         URL url = getClass().getResource("/data/products/apples.txt");
-        if (url == null){
+        if (url == null) {
             System.out.println("url is null");
             return;
         }
@@ -44,7 +43,7 @@ public class DataHandler {
         }
         Path myPath;
         FileSystem fs;
-        if (uri.getScheme().equals("jar")){
+        if (uri.getScheme().equals("jar")) {
             System.out.println("Scheme is JAR");
             try {
                 fs = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
@@ -55,7 +54,7 @@ public class DataHandler {
         } else myPath = Paths.get(uri).getParent();
         Stream<Path> walk;
         try {
-            walk = Files.walk(myPath,1);
+            walk = Files.walk(myPath, 1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -63,7 +62,7 @@ public class DataHandler {
                 .forEach(s -> this.products.add(new Product(s.getFileName().toString())));
     }
 
-    public List<Salaries> getSalaries() {
+    public List<Salary> getSalaries() {
         return salaries;
     }
 

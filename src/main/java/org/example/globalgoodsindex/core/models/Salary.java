@@ -1,10 +1,10 @@
 package org.example.globalgoodsindex.core.models;
 
-public class Salaries extends Entry {
+public class Salary extends Entry {
 
     private final double salary;
 
-    public Salaries(String name, double price) {
+    public Salary(String name, double price) {
         super(name);
         this.salary = price;
     }

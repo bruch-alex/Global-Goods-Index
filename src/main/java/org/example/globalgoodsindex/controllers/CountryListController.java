@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import org.example.globalgoodsindex.Main;
+import org.example.globalgoodsindex.App;
 import org.example.globalgoodsindex.core.models.Entry;
-import org.example.globalgoodsindex.core.models.Salaries;
+import org.example.globalgoodsindex.core.models.Salary;
 import org.example.globalgoodsindex.core.services.L10N;
 
 import java.util.List;
@@ -27,11 +27,11 @@ public class CountryListController {
     @FXML
     public void initialize() {
         bindStrings();
-        countryList.setItems(FXCollections.observableArrayList(Main.dataHandler.getSalaries()));
+        countryList.setItems(FXCollections.observableArrayList(App.dataHandler.getSalaries()));
         countryList.setCellFactory(_ -> new CheckBoxFactory());
 
         countrySearchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            List<Salaries> filteredData = Main.dataHandler.getSalaries().stream()
+            List<Salary> filteredData = App.dataHandler.getSalaries().stream()
                     .filter(item -> L10N.get(item.getName()).toLowerCase().contains(newValue.toLowerCase()))
                     .toList();
 
