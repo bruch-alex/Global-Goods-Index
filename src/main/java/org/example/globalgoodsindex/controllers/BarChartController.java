@@ -94,7 +94,6 @@ public class BarChartController {
 
         for (Salary salary : App.dataHandler.getSalaries()) {
             if (salary.isSelected()) {
-                System.out.println("add data point");
                 addDataPoint(productSeries, product, salary);
             }
         }
@@ -137,7 +136,7 @@ public class BarChartController {
 
         dataPoint.nodeProperty().addListener((observable, oldNode, newNode) -> {
             if (newNode != null) {
-                Tooltip tooltip = createTooltip(salary.getName(), salaryValue, price, productsCount);
+                Tooltip tooltip = createTooltip(salary.getName(), product.getName(), salaryValue, price, productsCount);
                 tooltip.setShowDelay(Duration.millis(0));
                 Tooltip.install(newNode, tooltip);
             }
@@ -153,11 +152,12 @@ public class BarChartController {
         return null;
     }
 
-    private Tooltip createTooltip(String countryName, double salary, double price, int productsCount) {
+    private Tooltip createTooltip(String countryName, String productName, double salary, double price, int productsCount) {
         return new Tooltip(
-                L10N.get("country") + ": " + countryName + "\n" +
-                        L10N.get("average_salary") + ": " + salary + "\n" +
-                        L10N.get("product_price") + ": " + price + "\n" +
+                countryName + ":\n\t" +
+                        L10N.get("average_salary") + ": $" + salary + "\n" +
+                        productName + ":\n\t" +
+                        L10N.get("product_price") + ": $" + price + "\n\t" +
                         L10N.get("product_purchasable") + ": " + productsCount
         );
     }

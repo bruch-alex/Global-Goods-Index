@@ -16,13 +16,13 @@ public class CheckBoxFactory extends ListCell<Entry> {
             checkBox.textProperty().bind(entry.nameProperty());
             checkBox.selectedProperty().bindBidirectional(entry.selectedProperty());
 
-            // Listener for debugging only
-            checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
-                if (newValue || oldValue) {
-                    System.out.println("Changed value for checkbox " + checkBox.getText() + " from " + oldValue + " to " + newValue);
-                    System.out.println("Value for instance " + entry.getName() + " is " + entry.isSelected());
-                }
-            });
+//            // Listener for debugging only
+//            checkBox.selectedProperty().addListener((_, oldValue, newValue) -> {
+//                if (newValue || oldValue) {
+//                    System.out.println("Changed value for checkbox " + checkBox.getText() + " from " + oldValue + " to " + newValue);
+//                    System.out.println("Value for instance " + entry.getName() + " is " + entry.isSelected());
+//                }
+//            });
 
             setGraphic(checkBox);
         }
