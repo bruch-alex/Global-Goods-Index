@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import org.example.globalgoodsindex.core.services.ThemeManager;
+import org.example.globalgoodsindex.services.ThemeManager;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class IconThemeSwitcherController {

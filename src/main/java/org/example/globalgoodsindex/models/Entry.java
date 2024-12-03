@@ -1,10 +1,10 @@
-package org.example.globalgoodsindex.core.models;
+package org.example.globalgoodsindex.models;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.example.globalgoodsindex.core.services.L10N;
+import org.example.globalgoodsindex.services.L10N;
 
 public abstract class Entry {
     protected final StringProperty nameProperty;

@@ -8,14 +8,15 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tooltip;
 import javafx.util.Duration;
 import org.example.globalgoodsindex.App;
-import org.example.globalgoodsindex.core.models.Product;
-import org.example.globalgoodsindex.core.models.Salary;
-import org.example.globalgoodsindex.core.services.L10N;
+import org.example.globalgoodsindex.models.Product;
+import org.example.globalgoodsindex.models.Salary;
+import org.example.globalgoodsindex.services.L10N;
 
 public class BarChartController {
 
     @FXML
     CategoryAxis xAxis;
+
     @FXML
     NumberAxis yAxis;
 

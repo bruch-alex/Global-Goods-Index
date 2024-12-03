@@ -6,9 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import org.example.globalgoodsindex.App;
-import org.example.globalgoodsindex.core.models.Entry;
-import org.example.globalgoodsindex.core.models.Product;
-import org.example.globalgoodsindex.core.services.L10N;
+import org.example.globalgoodsindex.models.Entry;
+import org.example.globalgoodsindex.models.Product;
+import org.example.globalgoodsindex.services.L10N;
 
 import java.util.List;
 

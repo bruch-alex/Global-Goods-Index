@@ -22,6 +22,7 @@
         <junit.version>5.10.2</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
         <atlantafx.base.version>2.0.1</atlantafx.base.version>
+        <jsoup.version>1.18.1</jsoup.version>
     </properties>
 
     <dependencies>
@@ -44,6 +45,11 @@
             <groupId>io.github.mkpaz</groupId>
             <artifactId>atlantafx-base</artifactId>
             <version>${atlantafx.base.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
         </dependency>
     </dependencies>
     <build>
