@@ -2,8 +2,11 @@ package org.example.globalgoodsindex.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.example.globalgoodsindex.services.CSVReader;
+import org.example.globalgoodsindex.services.CSVWriter;
 import org.example.globalgoodsindex.services.FetchData;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,16 +14,43 @@ import java.util.List;
 public class DataHandler {
 
     // Load data
-    private final String salariesResourcePath = "/data/salaries/salaries.csv";
-    private final String productsResourcePath = "/data/products/products.csv";
+    private final String SALARIES_RESOURCE_PATH = "/data/salaries/salaries.csv";
+    private final String PRODUCTS_RESOURCE_PATH = "/data/products/products.csv";
 
-    private final ObservableList<Salary> salaries;
-    private final ObservableList<Product> products;
+    private ObservableList<Salary> salaries;
+    private ObservableList<Product> products;
 
     public DataHandler() {
-        this.salaries = FXCollections.observableArrayList(FetchData.scrapeSalaries());
+        this.salaries = FXCollections.observableArrayList();
         this.products = FXCollections.observableArrayList();
-        parseProducts(FetchData.scrapeProducts());
+        initialization();
+        //parseProducts(FetchData.scrapeProducts());
+    }
+
+    private void initialization(){
+        var salariesList = FetchData.scrapeSalaries();
+        var productsData = FetchData.scrapeProducts();
+
+        if(salariesList == null){
+            this.salaries = FXCollections.observableArrayList(CSVReader.readCSVToList(SALARIES_RESOURCE_PATH));
+        } else {
+            this.salaries = FXCollections.observableArrayList(salariesList);
+            CSVWriter.writeSalariesToCSV(this.salaries);
+        }
+
+        if (productsData == null){
+            List<Product> temp;
+            try{
+                temp = CSVReader.readProductsFromCSV(PRODUCTS_RESOURCE_PATH);
+                this.products = FXCollections.observableArrayList(temp);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(0);
+            }
+        } else {
+            parseProducts(productsData);
+            CSVWriter.writeProductsToCSV(productsData);
+        }
     }
 
     public void parseProducts(List<List<String>> products) {

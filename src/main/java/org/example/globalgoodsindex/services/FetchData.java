@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,8 +15,6 @@ import java.util.List;
 public class FetchData {
 
     public static List<Salary> scrapeSalaries() {
-        // System.out.println("Starting scrapeSalaries method");
-
         String url = "https://www.numbeo.com/cost-of-living/prices_by_country.jsp?displayCurrency=USD&itemId=105";
         List<Salary> salariesData = new ArrayList<>();
 
@@ -44,8 +43,9 @@ public class FetchData {
 
             //  System.out.println("Salaries successfully scraped.");
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Can't connect to Numbeo");
+            return null;
         }
 
         return salariesData;
@@ -101,8 +101,9 @@ public class FetchData {
 
             //   System.out.println("Products successfully scraped.");
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Can't connect to Numbeo");
+            return null;
         }
 
         return productsData;
