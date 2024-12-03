@@ -1,4 +1,4 @@
-package org.example.globalgoodsindex.core.services;
+package org.example.globalgoodsindex.services;
 
 import java.util.prefs.Preferences;
 

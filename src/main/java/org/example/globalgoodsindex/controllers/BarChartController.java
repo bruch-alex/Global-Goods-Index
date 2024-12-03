@@ -8,14 +8,15 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tooltip;
 import javafx.util.Duration;
 import org.example.globalgoodsindex.App;
-import org.example.globalgoodsindex.core.models.Product;
-import org.example.globalgoodsindex.core.models.Salary;
-import org.example.globalgoodsindex.core.services.L10N;
+import org.example.globalgoodsindex.models.Product;
+import org.example.globalgoodsindex.models.Salary;
+import org.example.globalgoodsindex.services.L10N;
 
 public class BarChartController {
 
     @FXML
     CategoryAxis xAxis;
+
     @FXML
     NumberAxis yAxis;
 
@@ -97,7 +98,6 @@ public class BarChartController {
                 addDataPoint(productSeries, product, salary);
             }
         }
-
         barChart.getData().add(productSeries);
     }
 
@@ -112,7 +112,6 @@ public class BarChartController {
 
             if (matchedProduct != null) {
                 addDataPoint(series, matchedProduct, salary);
-                barChart.requestLayout();
             }
         }
     }
@@ -125,6 +124,16 @@ public class BarChartController {
 
     private void addDataPoint(XYChart.Series<String, Number> series, Product product, Salary salary) {
         double price = product.getPrice(salary.getName());
+
+        if (price < 0) {
+            triggerToast(
+                    L10N.get("no_data_price_msg") + ":\n" +
+                            L10N.get("product") + " = " + L10N.get(product.getDatabaseName()+ ".short") +"\n" +
+                            L10N.get("country") + " = " + salary.getName()
+            );
+            return;
+        }
+
         double salaryValue = salary.getSalary();
         int productsCount = (int) (salaryValue / price);
 
@@ -161,5 +170,9 @@ public class BarChartController {
                         L10N.get("product_purchasable") + ": " + productsCount
         );
     }
+    private void triggerToast(String message) {
+        ToastNotifyController15ProMax.showToast(App.primaryStage, message, 3000);
+    }
+
 }
 

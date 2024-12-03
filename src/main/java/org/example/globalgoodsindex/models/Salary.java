@@ -1,4 +1,4 @@
-package org.example.globalgoodsindex.core.models;
+package org.example.globalgoodsindex.models;
 
 public class Salary extends Entry {
 

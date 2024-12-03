@@ -1,4 +1,4 @@
-package org.example.globalgoodsindex.core.services;
+package org.example.globalgoodsindex.services;
 
 import atlantafx.base.theme.NordDark;
 import atlantafx.base.theme.NordLight;

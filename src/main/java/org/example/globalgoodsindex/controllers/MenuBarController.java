@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import org.example.globalgoodsindex.core.services.L10N;
+import org.example.globalgoodsindex.services.L10N;
 
 import java.awt.Desktop;
 import java.io.IOException;
