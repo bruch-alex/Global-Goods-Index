@@ -9,7 +9,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ToastNotifyController15ProMax {
+public class ToastNotifyController {
     public static void showToast(Stage ownerStage, String message, int durationInMillis) {
         Popup popup = new Popup();
         popup.setAutoFix(true);
@@ -25,7 +25,6 @@ public class ToastNotifyController15ProMax {
         StackPane pane = new StackPane(label);
         pane.setStyle("-fx-background-color: transparent;");
         pane.setPadding(new Insets(0, 10, 10, 0));
-        //pane.setAlignment(Pos.BOTTOM_LEFT);
 
         popup.getContent().add(pane);
 

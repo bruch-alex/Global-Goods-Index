@@ -5,7 +5,6 @@ module org.example.globalgoodsindex {
     requires java.desktop;
     requires java.prefs;
     requires atlantafx.base;
-    requires com.fasterxml.jackson.databind;
     requires org.jsoup;
 
     opens org.example.globalgoodsindex.controllers to javafx.fxml;

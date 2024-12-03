@@ -171,7 +171,7 @@ public class BarChartController {
         );
     }
     private void triggerToast(String message) {
-        ToastNotifyController15ProMax.showToast(App.primaryStage, message, 3000);
+        ToastNotifyController.showToast(App.primaryStage, message, 3000);
     }
 
 }

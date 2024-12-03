@@ -1,20 +1,29 @@
+#contentBox {
+    -fx-padding: 20;
+    -fx-spacing: 20;
+    -fx-alignment: top-center;
+}
 
 .title-label {
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-text-alignment: left;
-    -fx-alignment: top-left;
+    -fx-text-alignment: center;
 }
 
 .content-label {
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-wrap-text: true;
     -fx-text-alignment: justify;
-    -fx-alignment: top-left;
 }
 
-#contentBox {
-    -fx-spacing: 10;
-    -fx-alignment: top-left;
-    -fx-padding: 10;
+.footer-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: gray;
+    -fx-font-style: italic;
+    -fx-text-alignment: center;
+    -fx-font-family: Arial
+}
+
+.hyperlink {
+    -fx-text-fill: #1a73e8;
 }

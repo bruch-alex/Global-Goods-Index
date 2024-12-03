@@ -14,7 +14,6 @@ public class UserPreferencesManager {
 
     // Theme Preferences
     public void saveTheme(String themeName) {
-        System.out.println("debug: current themeName: " + themeName);
         preferences.put(THEME_KEY, themeName);
     }
 

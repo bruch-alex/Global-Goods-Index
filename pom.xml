@@ -22,7 +22,6 @@
         <junit.version>5.10.2</junit.version>
         <ikonli.version>12.3.1</ikonli.version>
         <atlantafx.base.version>2.0.1</atlantafx.base.version>
-        <jackson.databind.version>2.15.2</jackson.databind.version>
         <jsoup.version>1.18.1</jsoup.version>
     </properties>
 
@@ -46,11 +45,6 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.databind.version}</version>
         </dependency>
     </dependencies>
     <build>

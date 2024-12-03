@@ -29,6 +29,8 @@ public class MenuBarController {
     @FXML
     private MenuItem githubMenuItem;
 
+    private Stage aboutWindow;
+
     @FXML
     private void initialize() {
         bindStrings();
@@ -37,7 +39,7 @@ public class MenuBarController {
     }
 
     @FXML
-    private void bindStrings(){
+    private void bindStrings() {
         settingsMenu.textProperty().bind(L10N.createStringBinding("settings"));
         viewMenu.textProperty().bind(L10N.createStringBinding("view"));
         helpMenu.textProperty().bind(L10N.createStringBinding("help"));
@@ -68,18 +70,25 @@ public class MenuBarController {
 
     @FXML
     private void openAboutWindow() {
-        try {
-            // Load the new window FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ui/about.fxml"));
-            Stage newStage = new Stage();
-            Scene newScene = new Scene(loader.load());
-            newStage.titleProperty().bind(L10N.createStringBinding("about"));
-            // Create a new stage (window) for the new window
-            newStage.setScene(newScene);
-            newStage.setResizable(false);
-            newStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (aboutWindow == null || !aboutWindow.isShowing()) {
+            //  Load 'About' Window only if it's not already open
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ui/about.fxml"));
+                aboutWindow = new Stage();
+                Scene newScene = new Scene(loader.load());
+                aboutWindow.titleProperty().bind(L10N.createStringBinding("about"));
+                aboutWindow.setScene(newScene);
+                aboutWindow.setResizable(false);
+
+                // Listener to clear the reference when the window is closed
+                aboutWindow.setOnHidden(event -> aboutWindow = null);
+                aboutWindow.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // If 'About' Window is already open bring it to the front
+            aboutWindow.toFront();
         }
     }
 }
