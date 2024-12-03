@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "title": "Global Goods Index",
+      "content": "Compare prices of different products in various countries using data from Numbeo.com."
+    },
+    {
+      "title": "Target Audience",
+      "content": "Designed for travelers, researchers, and anyone exploring global price trends."
+    },
+    {
+      "title": "Developer Information",
+      "content": "Created by the Global Goods Index Team. Contact: support@globalgoodsindex.com"
+    },
+    {
+      "title": "Version",
+      "content": "1.0.0"
+    },
+    {
+      "title": "Acknowledgment",
+      "content": "This app uses data from Numbeo.com. Visit their site for more details."
+    },
+    {
+      "title": "Disclaimer",
+      "content": "The price data is sourced from Numbeo.com and may not always be accurate. Use this app at your own risk."
+    },
+    {
+      "title": "Feedback",
+      "content": "We welcome your feedback! Email us at feedback@globalgoodsindex.com"
+    }
+  ]
+}
