@@ -30,7 +30,7 @@ public class ProductListController {
 
         productSearchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             List<Product> filteredData = App.dataHandler.getProducts().stream()
-                    .filter(item -> item.getName().toLowerCase().contains(newValue.toLowerCase()))
+                    .filter(item -> item.getName().contains(newValue.toLowerCase()))
                     .toList();
 
             productList.getItems().clear();

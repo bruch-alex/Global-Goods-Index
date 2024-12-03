@@ -98,7 +98,6 @@ public class BarChartController {
                 addDataPoint(productSeries, product, salary);
             }
         }
-
         barChart.getData().add(productSeries);
     }
 
@@ -113,7 +112,6 @@ public class BarChartController {
 
             if (matchedProduct != null) {
                 addDataPoint(series, matchedProduct, salary);
-                barChart.requestLayout();
             }
         }
     }

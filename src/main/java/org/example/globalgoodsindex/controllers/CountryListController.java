@@ -32,15 +32,13 @@ public class CountryListController {
 
         countrySearchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             List<Salary> filteredData = App.dataHandler.getSalaries().stream()
-                    .filter(item -> L10N.get(item.getName()).toLowerCase().contains(newValue.toLowerCase()))
+                    .filter(item -> item.getName().toLowerCase().contains(newValue.toLowerCase()))
                     .toList();
 
             countryList.getItems().clear();
             countryList.setItems(FXCollections.observableArrayList(filteredData));
             countryList.setCellFactory(_ -> new CheckBoxFactory());
         }));
-
-
     }
 
     @FXML
