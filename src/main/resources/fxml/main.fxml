@@ -6,17 +6,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.globalgoodsindex.controllers.MainController">
+<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1">
 
     <top>
         <fx:include fx:id="menuBarInclude" source="ui/menu-bar.fxml" />
     </top>
 
     <center>
-        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <!--            <fx:include fx:id="iconThemeSwitcher" source="ui/themeSwitcher/icon-theme-switcher.fxml"/>-->
             <fx:include source="ui/bar-chart-view.fxml" />
          <Separator prefWidth="200.0" />
@@ -24,7 +21,7 @@
     </center>
 
     <bottom>
-        <HBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="20.0" BorderPane.alignment="CENTER">
+        <HBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="150.0" spacing="20.0" BorderPane.alignment="CENTER">
             <fx:include source="ui/country-list.fxml" />
             <fx:include source="ui/product-list.fxml" />
             <BorderPane.margin>

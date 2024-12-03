@@ -1,18 +1,17 @@
-package org.example.globalgoodsindex.core.models;
+package org.example.globalgoodsindex.models;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.example.globalgoodsindex.core.services.CSVReader;
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class Product extends Entry{
+public class Product extends Entry {
 
-    protected final ObservableList<Salary> prices;
+    public final String databaseName;
+    protected final List<Salary> prices;
 
     public Product(String name) {
-        super(name.replace(".txt", ""));
-        this.prices = FXCollections.observableArrayList(CSVReader.readCSVToList("/data/products/" + name));
+        super(name);
+        this.prices = new ArrayList<>();
+        databaseName = name;
     }
 
     public List<Salary> getPrices() {
@@ -27,11 +26,19 @@ public class Product extends Entry{
                 '}';
     }
 
-    public double getPrice(String countryName){
+    public double getPrice(String countryName) {
         return prices.stream()
                 .filter(s -> s.getName().equalsIgnoreCase(countryName))
                 .toList()
                 .getFirst()
                 .getSalary();
+    }
+
+    public void addPrices(List<Salary> prices) {
+        this.prices.addAll(prices);
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
     }
 }

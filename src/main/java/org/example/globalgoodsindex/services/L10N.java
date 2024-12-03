@@ -1,9 +1,10 @@
-package org.example.globalgoodsindex.core.services;
+package org.example.globalgoodsindex.services;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import org.example.globalgoodsindex.models.Product;
 
 import java.text.MessageFormat;
 import java.util.*;
@@ -78,5 +79,10 @@ public final class L10N {
      */
     public static StringBinding createStringBinding(final String key, Object... args) {
         return Bindings.createStringBinding(() -> get(key, args), locale);
+    }
+
+    public static StringBinding getShortNameBinding(Product product) {
+        String shortNameKey = product.getDatabaseName() + ".short";
+        return L10N.createStringBinding(shortNameKey);
     }
 }

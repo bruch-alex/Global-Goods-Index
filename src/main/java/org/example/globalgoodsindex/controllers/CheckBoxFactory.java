@@ -2,7 +2,9 @@ package org.example.globalgoodsindex.controllers;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
-import org.example.globalgoodsindex.core.models.Entry;
+import org.example.globalgoodsindex.models.Entry;
+import org.example.globalgoodsindex.models.Product;
+import org.example.globalgoodsindex.services.L10N;
 
 public class CheckBoxFactory extends ListCell<Entry> {
     @Override
@@ -13,7 +15,12 @@ public class CheckBoxFactory extends ListCell<Entry> {
             setGraphic(null);
         } else {
             CheckBox checkBox = new CheckBox();
-            checkBox.textProperty().bind(entry.nameProperty());
+            if (entry instanceof Product) {
+                checkBox.textProperty().bind(L10N.getShortNameBinding((Product) entry));
+            } else {
+                checkBox.textProperty().bind(entry.nameProperty());
+            }
+
             checkBox.selectedProperty().bindBidirectional(entry.selectedProperty());
 
 //            // Listener for debugging only

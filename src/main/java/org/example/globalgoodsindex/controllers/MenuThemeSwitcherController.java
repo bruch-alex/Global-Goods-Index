@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
-import org.example.globalgoodsindex.core.services.L10N;
-import org.example.globalgoodsindex.core.services.ThemeManager;
-import org.example.globalgoodsindex.core.services.UserPreferencesManager;
+import org.example.globalgoodsindex.services.L10N;
+import org.example.globalgoodsindex.services.ThemeManager;
+import org.example.globalgoodsindex.services.UserPreferencesManager;
 
 public class MenuThemeSwitcherController {
 

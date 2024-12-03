@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
-import org.example.globalgoodsindex.core.services.L10N;
+import org.example.globalgoodsindex.services.L10N;
 
 import java.util.Locale;
 
