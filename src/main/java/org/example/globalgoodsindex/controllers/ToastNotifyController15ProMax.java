@@ -18,9 +18,9 @@ public class ToastNotifyController15ProMax {
 
         Label label = new Label(message);
         label.setStyle("-fx-background-color: #0969da; -fx-text-fill: #f6f8fa; -fx-padding: 10px; "
-                + "-fx-border-radius: 2px; -fx-background-radius: 2px;");
+                + "-fx-border-radius: 2px; -fx-background-radius: 2px;" + "-fx-font-size: 18");
         label.setWrapText(true);
-        label.setPrefWidth(180);
+        label.setPrefWidth(250);
 
         StackPane pane = new StackPane(label);
         pane.setStyle("-fx-background-color: transparent;");
@@ -31,8 +31,11 @@ public class ToastNotifyController15ProMax {
 
         // Positioning the toast
         popup.setOnShown(e -> {
-            popup.setX(ownerStage.getX()*2); // => left offset
-            popup.setY(ownerStage.getY()*2); // => top offset
+            double centerX = ownerStage.getX() + (ownerStage.getWidth() / 2) - (pane.getWidth() / 2);
+            double centerY = ownerStage.getY() + (ownerStage.getHeight() / 2) - (pane.getHeight() / 2);
+
+            popup.setX(centerX);
+            popup.setY(centerY);
         });
 
         popup.show(ownerStage);

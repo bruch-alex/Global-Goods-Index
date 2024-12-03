@@ -128,11 +128,11 @@ public class BarChartController {
         if (price < 0) {
             triggerToast(
                     L10N.get("no_data_price_msg") + ":\n" +
-                            L10N.get("product") + " = " + product.getName() + "\n" +
+                            L10N.get("product") + " = " + L10N.get(product.getDatabaseName()+ ".short") +"\n" +
                             L10N.get("country") + " = " + salary.getName()
             );
             return;
-        } // trigger toast here?
+        }
 
         double salaryValue = salary.getSalary();
         int productsCount = (int) (salaryValue / price);
