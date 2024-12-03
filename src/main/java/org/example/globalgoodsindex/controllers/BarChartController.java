@@ -124,6 +124,9 @@ public class BarChartController {
 
     private void addDataPoint(XYChart.Series<String, Number> series, Product product, Salary salary) {
         double price = product.getPrice(salary.getName());
+
+        if (price < 0) {return;} // trigger toast here?
+
         double salaryValue = salary.getSalary();
         int productsCount = (int) (salaryValue / price);
 
