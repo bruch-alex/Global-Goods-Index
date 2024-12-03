@@ -1,7 +1,6 @@
 module org.example.globalgoodsindex {
     requires javafx.fxml;
 
-    requires org.kordamp.ikonli.javafx;
     requires java.desktop;
     requires java.prefs;
     requires atlantafx.base;
