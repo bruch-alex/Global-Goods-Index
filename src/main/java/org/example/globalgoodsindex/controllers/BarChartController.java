@@ -125,7 +125,14 @@ public class BarChartController {
     private void addDataPoint(XYChart.Series<String, Number> series, Product product, Salary salary) {
         double price = product.getPrice(salary.getName());
 
-        if (price < 0) {return;} // trigger toast here?
+        if (price < 0) {
+            triggerToast(
+                    L10N.get("no_data_price_msg") + ":\n" +
+                            L10N.get("product") + " = " + product.getName() + "\n" +
+                            L10N.get("country") + " = " + salary.getName()
+            );
+            return;
+        } // trigger toast here?
 
         double salaryValue = salary.getSalary();
         int productsCount = (int) (salaryValue / price);
@@ -163,5 +170,9 @@ public class BarChartController {
                         L10N.get("product_purchasable") + ": " + productsCount
         );
     }
+    private void triggerToast(String message) {
+        ToastNotifyController15ProMax.showToast(App.primaryStage, message, 3000);
+    }
+
 }
 

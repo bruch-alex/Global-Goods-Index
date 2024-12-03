@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class App extends Application {
     public static DataHandler dataHandler;
+    public static Stage primaryStage;
 
     public void run() {
         launch();
@@ -21,6 +22,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         dataHandler = new DataHandler();
+        App.primaryStage = stage;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
