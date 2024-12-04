@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefWidth="550.0"
+      xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.globalgoodsindex.controllers.AboutSectionController"
+      stylesheets="@../../styles/about.css"
+      fx:id="contentBox">
+
+
+</VBox>

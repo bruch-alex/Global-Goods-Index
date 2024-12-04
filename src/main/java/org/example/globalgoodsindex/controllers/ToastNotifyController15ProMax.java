@@ -25,7 +25,6 @@ public class ToastNotifyController15ProMax {
         StackPane pane = new StackPane(label);
         pane.setStyle("-fx-background-color: transparent;");
         pane.setPadding(new Insets(0, 10, 10, 0));
-        //pane.setAlignment(Pos.BOTTOM_LEFT);
 
         popup.getContent().add(pane);
 
