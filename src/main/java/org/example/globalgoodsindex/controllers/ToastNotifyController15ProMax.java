@@ -9,7 +9,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ToastNotifyController {
+public class ToastNotifyController15ProMax {
     public static void showToast(Stage ownerStage, String message, int durationInMillis) {
         Popup popup = new Popup();
         popup.setAutoFix(true);

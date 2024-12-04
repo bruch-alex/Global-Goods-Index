@@ -71,7 +71,6 @@ public class MenuBarController {
     @FXML
     private void openAboutWindow() {
         if (aboutWindow == null || !aboutWindow.isShowing()) {
-            //  Load 'About' Window only if it's not already open
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ui/about.fxml"));
                 aboutWindow = new Stage();
@@ -80,15 +79,18 @@ public class MenuBarController {
                 aboutWindow.setScene(newScene);
                 aboutWindow.setResizable(false);
 
-                // Listener to clear the reference when the window is closed
                 aboutWindow.setOnHidden(event -> aboutWindow = null);
                 aboutWindow.show();
             } catch (IOException e) {
+                System.err.println("Error loading about.fxml: " + e.getMessage());
+                e.printStackTrace();
+            } catch (Exception e) {
+                System.err.println("Unexpected error: " + e.getMessage());
                 e.printStackTrace();
             }
         } else {
-            // If 'About' Window is already open bring it to the front
             aboutWindow.toFront();
         }
     }
+
 }

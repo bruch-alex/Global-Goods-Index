@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -11,12 +14,15 @@ import javafx.scene.text.TextFlow;
 import org.example.globalgoodsindex.services.AppConfig;
 import org.example.globalgoodsindex.services.L10N;
 
+import java.text.MessageFormat;
+
 public class AboutSectionController {
 
     @FXML
     private VBox contentBox;
 
     public void initialize() {
+
         addDescriptionSection(
                 L10N.get("about.description.content"),
                 L10N.get("appName"),
@@ -28,6 +34,14 @@ public class AboutSectionController {
                 L10N.get("about.acknowledgment.content"),
                 L10N.get("about.credit.content"),
                 AppConfig.get("numbeo.url")
+        );
+
+        addDevelopersSection(
+                L10N.get("about.developers.title"),
+                new String[][]{
+                        {"bruch-alex", "github.bruch-alex"},
+                        {"nat-laz", "github.nat-laz"}
+                }
         );
 
         addFeedbackAndShareSection(
@@ -45,7 +59,6 @@ public class AboutSectionController {
         Label targetAudienceLabel = createContentLabel(targetAudience);
 
         VBox sectionBox = new VBox(descriptionFlow, targetAudienceLabel);
-        sectionBox.getStyleClass().add("section-divider");
         sectionBox.setSpacing(10);
 
         contentBox.getChildren().add(sectionBox);
@@ -62,37 +75,60 @@ public class AboutSectionController {
 
         TextFlow creditFlow = createHyperlinkedText(
                 creditContent,
-                "Visit Numbeo",
+                "Numbeo",
                 linkUrl
         );
 
         VBox sectionBox = new VBox(titleLabel, acknowledgmentFlow, creditFlow);
-        sectionBox.getStyleClass().add("section-divider");
         sectionBox.setSpacing(10);
 
         contentBox.getChildren().add(sectionBox);
     }
 
+    private void addDevelopersSection(String title, String[][] developersKeys) {
+        Label titleLabel = createTitleLabel(title);
+
+        HBox developersBox = new HBox();
+        developersBox.setSpacing(15);
+        developersBox.setAlignment(Pos.CENTER);
+
+        for (String[] developer : developersKeys) {
+            String name = developer[0];
+            String propertyKey = developer[1];
+
+            String link = AppConfig.get(propertyKey);
+            if (link == null || link.isBlank()) {
+                continue;
+            }
+
+            developersBox.getChildren().add(createDeveloperEntry(name, link));
+        }
+
+
+        VBox sectionBox = new VBox(titleLabel, developersBox);
+        sectionBox.setSpacing(10);
+
+        contentBox.getChildren().add(sectionBox);
+    }
+
+
     private void addFeedbackAndShareSection(String title, String feedbackContent, String feedbackUrl, String shareContent) {
         Label titleLabel = createTitleLabel(title);
 
-        TextFlow feedbackFlow = createHyperlinkedText(
-                feedbackContent,
-                "Click here",
-                feedbackUrl
-        );
+        String clickableText = L10N.get("about.feedback.clickable");
+        TextFlow feedbackFlow = createHyperlinkedText(feedbackContent, clickableText, feedbackUrl);
 
         Text shareText = new Text(shareContent);
         shareText.getStyleClass().add("content-label");
         TextFlow shareFlow = new TextFlow(shareText);
         shareFlow.setTextAlignment(TextAlignment.CENTER);
 
-
         VBox sectionBox = new VBox(titleLabel, feedbackFlow, shareFlow);
         sectionBox.setSpacing(10);
 
         contentBox.getChildren().add(sectionBox);
     }
+
 
     private void addFooter(String footerText) {
         Label footerLabel = createFooterLabel(footerText);
@@ -135,22 +171,42 @@ public class AboutSectionController {
     }
 
     private TextFlow createHyperlinkedText(String fullText, String hyperlinkText, String url) {
-        int hyperlinkIndex = fullText.indexOf(hyperlinkText);
+        String formattedText = MessageFormat.format(fullText, hyperlinkText);
+        int hyperlinkIndex = formattedText.indexOf(hyperlinkText);
 
         if (hyperlinkIndex == -1) {
             throw new IllegalArgumentException("Hyperlink text not found in full text.");
         }
 
-        Text preText = new Text(fullText.substring(0, hyperlinkIndex));
+        Text preText = new Text(formattedText.substring(0, hyperlinkIndex));
         Hyperlink link = new Hyperlink(hyperlinkText);
         link.setOnAction(event -> openLink(url));
         link.getStyleClass().add("hyperlink");
-        Text postText = new Text(fullText.substring(hyperlinkIndex + hyperlinkText.length()));
+        Text postText = new Text(formattedText.substring(hyperlinkIndex + hyperlinkText.length()));
 
         TextFlow textFlow = new TextFlow(preText, link, postText);
         textFlow.getStyleClass().add("content-label");
         return textFlow;
     }
+
+
+    private HBox createDeveloperEntry(String name, String url) {
+        ImageView githubIcon = new ImageView(new Image(getClass().getResourceAsStream("/images/github-icon.png")));
+        githubIcon.setFitWidth(15);
+        githubIcon.setFitHeight(15);
+        githubIcon.setPreserveRatio(true);
+
+        Hyperlink developerLink = new Hyperlink(name);
+        developerLink.setOnAction(event -> openLink(url));
+        developerLink.getStyleClass().add("hyperlink");
+
+        HBox developerBox = new HBox(githubIcon, developerLink);
+        developerBox.setSpacing(4);
+        developerBox.setAlignment(Pos.CENTER);
+
+        return developerBox;
+    }
+
 
     private Label createFooterLabel(String text) {
         Label label = new Label(text);
