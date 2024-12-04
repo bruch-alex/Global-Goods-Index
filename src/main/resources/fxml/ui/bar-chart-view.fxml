@@ -13,3 +13,6 @@
         <NumberAxis fx:id="yAxis"/>
     </yAxis>
 </BarChart>
+
+
+

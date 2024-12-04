@@ -128,7 +128,7 @@ public class BarChartController {
         if (price < 0) {
             triggerToast(
                     L10N.get("no_data_price_msg") + ":\n" +
-                            L10N.get("product") + " = " + L10N.get(product.getDatabaseName()+ ".short") +"\n" +
+                            L10N.get("product") + " = " + L10N.get(product.getDatabaseName() + ".short") + "\n" +
                             L10N.get("country") + " = " + salary.getName()
             );
             return;
@@ -163,13 +163,13 @@ public class BarChartController {
 
     private Tooltip createTooltip(String countryName, String productName, double salary, double price, int productsCount) {
         return new Tooltip(
-                countryName + ":\n\t" +
+                countryName + ":\n" + productName + "\n" +
                         L10N.get("average_salary") + ": $" + salary + "\n" +
-                        productName + ":\n\t" +
-                        L10N.get("product_price") + ": $" + price + "\n\t" +
+                        L10N.get("product_price") + ": $" + price + "\n" +
                         L10N.get("product_purchasable") + ": " + productsCount
         );
     }
+
     private void triggerToast(String message) {
         ToastNotifyController15ProMax.showToast(App.primaryStage, message, 3000);
     }

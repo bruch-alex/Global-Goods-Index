@@ -6,7 +6,7 @@
 <Menu fx:id="themeSwitcher"
       xmlns="http://javafx.com/javafx/"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.globalgoodsindex.controllers.MenuThemeSwitcherController">
+      fx:controller="org.example.globalgoodsindex.controllers.ThemeSwitcherController">
     <RadioMenuItem fx:id="lightThemeMenuItem" text="Primer Light"/>
     <RadioMenuItem fx:id="darkThemeMenuItem" text="Primer Dark"/>
     <RadioMenuItem fx:id="nordLightThemeMenuItem" text="Nord Light"/>
