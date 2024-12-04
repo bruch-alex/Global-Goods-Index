@@ -5,6 +5,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import org.example.globalgoodsindex.services.L10N;
+import org.example.globalgoodsindex.services.UserPreferencesManager;
 
 import java.util.Locale;
 
@@ -19,6 +20,12 @@ public class LanguageSelectorController {
     @FXML
     private RadioMenuItem russianMenuItem;
 
+    private final UserPreferencesManager preferencesManager;
+
+    public LanguageSelectorController() {
+        preferencesManager = new UserPreferencesManager();
+    }
+
     @FXML
     private void initialize() {
         ToggleGroup languageToggleGroup = new ToggleGroup();
@@ -26,14 +33,26 @@ public class LanguageSelectorController {
         germanMenuItem.setToggleGroup(languageToggleGroup);
         russianMenuItem.setToggleGroup(languageToggleGroup);
 
+        String savedLanguage = preferencesManager.getLanguage();
+        switch (savedLanguage) {
+            case "de" -> germanMenuItem.setSelected(true);
+            case "ru" -> russianMenuItem.setSelected(true);
+            default -> englishMenuItem.setSelected(true);
+        }
+        changeLanguage(savedLanguage);
+
         bindStrings();
-        englishMenuItem.setSelected(true);
 
         languageToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == englishMenuItem) changeLanguage("en");
-            else if (newValue == germanMenuItem) changeLanguage("de");
-            else if (newValue == russianMenuItem) changeLanguage("ru");
+            if (newValue == englishMenuItem) saveAndChangeLanguage("en");
+            else if (newValue == germanMenuItem) saveAndChangeLanguage("de");
+            else if (newValue == russianMenuItem) saveAndChangeLanguage("ru");
         });
+    }
+
+    private void saveAndChangeLanguage(String language) {
+        preferencesManager.saveLanguage(language);
+        changeLanguage(language);
     }
 
     public void changeLanguage(String language) {
