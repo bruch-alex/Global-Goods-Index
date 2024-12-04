@@ -26,29 +26,35 @@
     </properties>
 
     <dependencies>
+        <!-- JavaFX Controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+        <!-- JavaFX FXML -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+        <!-- Atlantafx -->
         <dependency>
             <groupId>io.github.mkpaz</groupId>
             <artifactId>atlantafx-base</artifactId>
             <version>${atlantafx.base.version}</version>
         </dependency>
+        <!-- JSoup -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -57,6 +63,8 @@
                     <release>${jdk.version}</release>
                 </configuration>
             </plugin>
+
+            <!-- Maven Shade Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -78,6 +86,46 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Exec Maven Plugin for JPackage -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>jpackage</executable>
+                            <arguments>
+                                <argument>--input</argument>
+                                <argument>${project.build.directory}</argument>
+                                <argument>--dest</argument>
+                                <argument>${project.build.directory}/installer</argument>
+                                <argument>--name</argument>
+                                <argument>GlobalGoodsIndex</argument>
+                                <argument>--main-jar</argument>
+                                <argument>global-goods-index-${project.version}.jar</argument>
+                                <argument>--main-class</argument>
+                                <argument>org.example.globalgoodsindex.Launcher</argument>
+                                <argument>--type</argument>
+                                <argument>dmg</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <!-- Jitpack Repository -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>
