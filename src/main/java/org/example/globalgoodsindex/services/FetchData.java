@@ -1,5 +1,6 @@
 package org.example.globalgoodsindex.services;
 
+import org.example.globalgoodsindex.models.Goods;
 import org.example.globalgoodsindex.models.Product;
 import org.example.globalgoodsindex.models.Salary;
 import org.jsoup.Jsoup;
@@ -54,12 +55,16 @@ public class FetchData {
     public static List<List<String>> scrapeProducts() {
         //System.out.println("Starting scrapeProducts method");
 
-        String url = "https://www.numbeo.com/cost-of-living/prices_by_country.jsp?displayCurrency=USD&itemId=110&itemId=118&itemId=121&itemId=14&itemId=19&itemId=17&itemId=15&itemId=11&itemId=16&itemId=113&itemId=9&itemId=12&itemId=8&itemId=119&itemId=111&itemId=112&itemId=115&itemId=116&itemId=13";
+        String baseUrl = "https://www.numbeo.com/cost-of-living/prices_by_country.jsp?displayCurrency=USD";
         List<List<String>> productsData = new ArrayList<>();
+        StringBuilder url = new StringBuilder(baseUrl);
 
+        for (var v : Goods.values()) {
+            url.append("&itemId=").append(v.getItemId());
+        }
         try {
 
-            Document doc = Jsoup.connect(url).get();
+            Document doc = Jsoup.connect(url.toString()).get();
 
             // Extract headers
             Elements headers = doc.select("thead tr th");

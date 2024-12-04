@@ -14,6 +14,7 @@ public abstract class Entry {
         this.nameProperty = new SimpleStringProperty();
         this.nameProperty.bind(L10N.createStringBinding(name));
         this.selectedProperty = new SimpleBooleanProperty(false);
+        checkTranslation(name);
     }
 
     public String getName() {
@@ -30,5 +31,9 @@ public abstract class Entry {
 
     public BooleanProperty selectedProperty() {
         return this.selectedProperty;
+    }
+
+    private void checkTranslation(String name){
+        if(this.getName() == null) System.out.println("there is no name for " + name);
     }
 }
