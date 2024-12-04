@@ -180,7 +180,7 @@ public class AboutSectionController {
 
         Text preText = new Text(formattedText.substring(0, hyperlinkIndex));
         Hyperlink link = new Hyperlink(hyperlinkText);
-        link.setOnAction(event -> openLink(url));
+        link.setOnAction(event -> MenuBarController.openWebsite(url));
         link.getStyleClass().add("hyperlink");
         Text postText = new Text(formattedText.substring(hyperlinkIndex + hyperlinkText.length()));
 
@@ -197,7 +197,7 @@ public class AboutSectionController {
         githubIcon.setPreserveRatio(true);
 
         Hyperlink developerLink = new Hyperlink(name);
-        developerLink.setOnAction(event -> openLink(url));
+        developerLink.setOnAction(event -> MenuBarController.openWebsite(url));
         developerLink.getStyleClass().add("hyperlink");
 
         HBox developerBox = new HBox(githubIcon, developerLink);
@@ -217,11 +217,4 @@ public class AboutSectionController {
         return label;
     }
 
-    private void openLink(String url) {
-        try {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
