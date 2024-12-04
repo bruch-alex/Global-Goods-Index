@@ -1,6 +1,6 @@
 #contentBox {
-    -fx-padding: 20;
-    -fx-spacing: 20;
+    -fx-padding: 25;
+    -fx-spacing: 25;
     -fx-alignment: top-center;
 }
 
@@ -13,7 +13,7 @@
 .content-label {
     -fx-font-size: 14px;
     -fx-wrap-text: true;
-    -fx-text-alignment: justify;
+    -fx-text-alignment: center;
 }
 
 .footer-label {
@@ -27,3 +27,4 @@
 .hyperlink {
     -fx-text-fill: #1a73e8;
 }
+

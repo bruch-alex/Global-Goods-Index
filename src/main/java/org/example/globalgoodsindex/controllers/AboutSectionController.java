@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import org.example.globalgoodsindex.services.AppConfig;
 import org.example.globalgoodsindex.services.L10N;
 
 public class AboutSectionController {
@@ -26,13 +27,13 @@ public class AboutSectionController {
                 L10N.get("about.acknowledgment.title"),
                 L10N.get("about.acknowledgment.content"),
                 L10N.get("about.credit.content"),
-                "https://www.numbeo.com"
+                AppConfig.get("numbeo.url")
         );
 
         addFeedbackAndShareSection(
                 L10N.get("about.feedback.title"),
                 L10N.get("about.feedback.content"),
-                "https://www.numbeo.com/cost-of-living/prices_by_country.jsp",
+                AppConfig.get("survey.url"),
                 L10N.get("about.share.content")
         );
 
