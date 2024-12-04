@@ -47,7 +47,7 @@ public class MenuBarController {
         githubMenuItem.textProperty().bind(L10N.createStringBinding("visit_github"));
     }
 
-    private void openWebsite(String url) {
+    public static void openWebsite(String url) {
         Task<Void> openWebSiteTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
