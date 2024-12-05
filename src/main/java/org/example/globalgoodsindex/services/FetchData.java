@@ -1,6 +1,7 @@
 package org.example.globalgoodsindex.services;
 
 import org.example.globalgoodsindex.models.Goods;
+import org.example.globalgoodsindex.models.Product;
 import org.example.globalgoodsindex.models.Salary;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,7 +40,7 @@ public class FetchData {
                 }
             }
 
-            // Sort alphabetically by country name
+            // sort alphabetically by country name
             salariesData.sort(Comparator.comparing(Salary::getName));
 
         } catch (IOException e) {
@@ -52,7 +53,9 @@ public class FetchData {
 
     public static List<List<String>> scrapeProducts() {
 
+
         String baseUrl = AppConfig.get("numeo.url.products-data");
+
         List<List<String>> productsData = new ArrayList<>();
         StringBuilder url = new StringBuilder(baseUrl);
 
