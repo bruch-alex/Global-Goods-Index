@@ -63,7 +63,7 @@ public final class L10N {
         return Bindings.createStringBinding(() -> get(key), locale);
     }
 
-    public static StringBinding getShortNameBinding(Product product) {
+    public static StringBinding createShortNameBinding(Product product) {
         String shortNameKey = product.getDatabaseName() + ".short";
         return L10N.createStringBinding(shortNameKey);
     }

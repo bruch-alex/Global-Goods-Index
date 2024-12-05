@@ -16,7 +16,7 @@ public class CheckBoxFactory extends ListCell<Entry> {
         } else {
             CheckBox checkBox = new CheckBox();
             if (entry instanceof Product) {
-                checkBox.textProperty().bind(L10N.getShortNameBinding((Product) entry));
+                checkBox.textProperty().bind(L10N.createShortNameBinding((Product) entry));
             } else {
                 checkBox.textProperty().bind(entry.nameProperty());
             }
