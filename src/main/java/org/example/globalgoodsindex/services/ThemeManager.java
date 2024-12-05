@@ -5,38 +5,34 @@ import atlantafx.base.theme.NordLight;
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ThemeManager {
-
+    private final Map<String, String> themeStylesheets = new HashMap<>();
     private final UserPreferencesManager preferencesManager;
 
     public ThemeManager(UserPreferencesManager preferencesManager) {
         this.preferencesManager = preferencesManager;
-
+        registerThemes();
     }
 
-    public void applySavedTheme() {
-        String savedTheme = preferencesManager.getTheme();
-        applyTheme(savedTheme);
+    private void registerThemes() {
+        themeStylesheets.put("PrimerLight", new PrimerLight().getUserAgentStylesheet());
+        themeStylesheets.put("PrimerDark", new PrimerDark().getUserAgentStylesheet());
+        themeStylesheets.put("NordLight", new NordLight().getUserAgentStylesheet());
+        themeStylesheets.put("NordDark", new NordDark().getUserAgentStylesheet());
     }
 
     public void applyTheme(String themeName) {
-        switch (themeName) {
-            case "PrimerDark":
-                Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
-                break;
-            case "NordLight":
-                Application.setUserAgentStylesheet(new NordLight().getUserAgentStylesheet());
-                break;
-            case "NordDark":
-                Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
-                break;
-            default:
-                Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
-                break;
-        }
+        String stylesheet = themeStylesheets.getOrDefault(themeName, themeStylesheets.get("PrimerLight"));
+        Application.setUserAgentStylesheet(stylesheet);
         preferencesManager.saveTheme(themeName);
     }
+
+    public String getSavedTheme() {
+        return preferencesManager.getTheme();
+    }
 }
+

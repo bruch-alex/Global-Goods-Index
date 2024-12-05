@@ -32,7 +32,7 @@ public class App extends Application {
         ThemeManager themeManager = new ThemeManager(preferencesManager);
 
         // apply saved theme
-        themeManager.applySavedTheme();
+        themeManager.getSavedTheme();
         stage.setScene(scene);
         stage.show();
     }

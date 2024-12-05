@@ -16,7 +16,8 @@ import java.util.List;
 public class FetchData {
 
     public static List<Salary> scrapeSalaries() {
-        String url = "https://www.numbeo.com/cost-of-living/prices_by_country.jsp?displayCurrency=USD&itemId=105";
+
+        String url = AppConfig.get("numeo.url.average-salary");
         List<Salary> salariesData = new ArrayList<>();
 
         try {
@@ -39,10 +40,8 @@ public class FetchData {
                 }
             }
 
-            // Sort alphabetically by country name
+            // sort alphabetically by country name
             salariesData.sort(Comparator.comparing(Salary::getName));
-
-            //  System.out.println("Salaries successfully scraped.");
 
         } catch (IOException e) {
             System.err.println("Can't connect to Numbeo");
@@ -53,9 +52,10 @@ public class FetchData {
     }
 
     public static List<List<String>> scrapeProducts() {
-        //System.out.println("Starting scrapeProducts method");
 
-        String baseUrl = "https://www.numbeo.com/cost-of-living/prices_by_country.jsp?displayCurrency=USD";
+
+        String baseUrl = AppConfig.get("numeo.url.products-data");
+
         List<List<String>> productsData = new ArrayList<>();
         StringBuilder url = new StringBuilder(baseUrl);
 
@@ -72,8 +72,6 @@ public class FetchData {
             for (int i = 2; i < headers.size(); i++) { // Skip the first column (Rank)
                 String headerText = headers.get(i).text().trim().toLowerCase();
                 headerText = headerText.replaceAll("[().,-]", "").replaceAll("[ ]", "_");
-
-                //System.out.println(headerText);
                 columnHeaders.add(headerText);
             }
 
@@ -94,7 +92,6 @@ public class FetchData {
                     String price = cells.get(i).text().trim();
                     rowData.add(price.isEmpty() ? "-" : price);
                 }
-                //rowData.forEach(System.out::println);
                 data.add(rowData);
             }
 
@@ -104,7 +101,6 @@ public class FetchData {
             productsData.add(columnHeaders);
             productsData.addAll(data);
 
-            //   System.out.println("Products successfully scraped.");
 
         } catch (IOException e) {
             System.err.println("Can't connect to Numbeo");
