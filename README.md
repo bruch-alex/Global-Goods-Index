@@ -72,6 +72,16 @@ The Wiki provides detailed documentation about the application’s structure, fe
 
 ## How to Build & Run
 
+### How to run?
+
+1. Download `jar-files.zip` from [latest release](https://github.com/bruch-alex/Global-Goods-Index/releases/latest)
+2. Extract it somewhere
+3. Run apropriate jar file with following command:
+
+```java
+java -jar file-name.jar
+```
+
 ### How to Build executable file?
 
 1. Download this repo
